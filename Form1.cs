@@ -16,5 +16,11 @@ namespace HacTrac
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            log a = new log();
+            a.QueryRemoteComputer();
+        }
     }
 }
