@@ -20,7 +20,9 @@ namespace HacTrac
         private void button1_Click(object sender, EventArgs e)
         {
             log a = new log();
-            a.QueryRemoteComputer();
+            DataSet ds = a.QueryRemoteComputer();
+            dataGridView1.DataSource = ds; // dataset
+            dataGridView1.DataMember = "Events";
         }
     }
 }

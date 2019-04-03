@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Security;
@@ -11,9 +12,18 @@ namespace HacTrac
     class log
 
     {
+        DataSet data = new DataSet();
         private void DisplayEventAndLogInformation(EventLogReader logreader)
 
         {
+            DataSet ds = new DataSet();
+            ds.Tables.Add("Events");
+            ds.Tables["Events"].Columns.Add("ComputerName");
+            ds.Tables["Events"].Columns.Add("EventId");
+            ds.Tables["Events"].Columns.Add("EventType");
+            ds.Tables["Events"].Columns.Add("SourceName");
+            
+            
 
             for (EventRecord eventInstance = logreader.ReadEvent();
 
@@ -21,38 +31,16 @@ namespace HacTrac
 
             {
 
-                Console.WriteLine("----------------------------------------------------");
+                ds.Tables["Events"].Rows.Add(eventInstance.ProviderName,eventInstance.Id,eventInstance.ActivityId, eventInstance.Keywords);
 
-                Console.WriteLine("Event ID: {0}", eventInstance.Id);
+               
 
-                Console.WriteLine("Publisher:{0}", eventInstance.ProviderName);
-
-                Console.WriteLine("Keywords:{0}", eventInstance.Keywords);
-
-
-
-                try
-
-                {
-
-                    Console.WriteLine("Description: {0}", eventInstance.FormatDescription());
-
-                }
-
-                catch (EventLogException ex)
-
-                {
-
-                    Console.WriteLine("Description: {0}", ex.Message);
-
-                }
-
-
-                              EventLogRecord logRecord = (EventLogRecord)eventInstance;
-
-                Console.WriteLine("Container Event Log: {0}", logRecord.ContainerLog);
+                
+                
 
             }
+
+            data = ds;
 
         }
         public static SecureString GetPassword(string inputString)
@@ -74,7 +62,7 @@ namespace HacTrac
             return secureString;
 
         }
-        public void QueryRemoteComputer()
+        public DataSet QueryRemoteComputer()
         {
             string queryString = "*[System/Level=2]"; // XPATH Query
             SecureString pw = GetPassword("@mmba13!");
@@ -97,13 +85,15 @@ namespace HacTrac
                 EventLogReader logReader = new EventLogReader(query);
 
                 // Display event info
-                DisplayEventAndLogInformation(logReader);
+                 DisplayEventAndLogInformation(logReader);
+
             }
             catch (EventLogException e)
             {
                 Console.WriteLine("Could not query the remote computer! " + e.Message);
-                return;
+                
             }
+            return data;
         }
     }
 }
