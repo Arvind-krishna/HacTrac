@@ -1,0 +1,7 @@
+username,password,service,server
+vimalsh,mmba12!,TERMSRV,10.0.0.1
+shekar,ospite13!,CIFS,vimalsserver.bingo.com
+arvindk,ls1setup@,TERMSRV,192.168.1.1
+krish,bingo123!,CIFS,10.0.0.2
+aajay,pass@word1,TERMSRV,10.0.0.3
+anuvim,Pa$$w0rd!,CIFS,10.0.0.4
