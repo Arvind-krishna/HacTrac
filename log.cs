@@ -62,22 +62,22 @@ namespace HacTrac
             return secureString;
 
         }
-        public DataSet QueryRemoteComputer()
+        public DataSet QueryRemoteComputer(string querystring,Queryobj o)
         {
-            string queryString = "*[System/Level=2]"; // XPATH Query
-            SecureString pw = GetPassword("@mmba13!");
+            string queryString = querystring; // XPATH Query
+            SecureString pw = GetPassword(o.password);
 
             EventLogSession session = new EventLogSession(
-                "192.168.56.2",                               // Remote Computer
-                "krish.com",                                  // Domain
-                "Administrator",                                // Username
+                o.IP,                               // Remote Computer
+                o.domain,                                  // Domain
+                o.username,                                // Username
                 pw,
                 SessionAuthentication.Default);
 
             pw.Dispose();
 
             // Query the Application log on the remote computer.
-            EventLogQuery query = new EventLogQuery("Application", PathType.LogName, queryString);
+            EventLogQuery query = new EventLogQuery("Security", PathType.LogName, queryString);
             query.Session = session;
 
             try
