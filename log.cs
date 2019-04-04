@@ -24,6 +24,7 @@ namespace HacTrac
             ds.Tables["Events"].Columns.Add("Task");
             ds.Tables["Events"].Columns.Add("User");
             ds.Tables["Events"].Columns.Add("Operation");
+            ds.Tables["Events"].Columns.Add("XML");
 
 
 
@@ -33,7 +34,8 @@ namespace HacTrac
 
             {
 
-                ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName,eventInstance.TimeCreated,eventInstance.Id,eventInstance.TaskDisplayName,eventInstance.UserId,eventInstance.OpcodeDisplayName);
+                ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName,eventInstance.TimeCreated,eventInstance.Id,eventInstance.TaskDisplayName,eventInstance.UserId,eventInstance.OpcodeDisplayName, eventInstance.ToXml());
+                
 
                
 
