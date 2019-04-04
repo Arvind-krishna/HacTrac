@@ -18,12 +18,14 @@ namespace HacTrac
         {
             DataSet ds = new DataSet();
             ds.Tables.Add("Events");
-            ds.Tables["Events"].Columns.Add("ComputerName");
-            ds.Tables["Events"].Columns.Add("EventId");
-            ds.Tables["Events"].Columns.Add("EventType");
-            ds.Tables["Events"].Columns.Add("SourceName");
-            
-            
+            ds.Tables["Events"].Columns.Add("Level");
+            ds.Tables["Events"].Columns.Add("Time");
+            ds.Tables["Events"].Columns.Add("Event ID");
+            ds.Tables["Events"].Columns.Add("Task");
+            ds.Tables["Events"].Columns.Add("User");
+            ds.Tables["Events"].Columns.Add("Operation");
+
+
 
             for (EventRecord eventInstance = logreader.ReadEvent();
 
@@ -31,7 +33,7 @@ namespace HacTrac
 
             {
 
-                ds.Tables["Events"].Rows.Add(eventInstance.ProviderName,eventInstance.Id,eventInstance.ActivityId, eventInstance.Keywords);
+                ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName,eventInstance.TimeCreated,eventInstance.Id,eventInstance.TaskDisplayName,eventInstance.UserId,eventInstance.OpcodeDisplayName);
 
                
 
@@ -77,7 +79,7 @@ namespace HacTrac
             pw.Dispose();
 
             // Query the Application log on the remote computer.
-            EventLogQuery query = new EventLogQuery("Security", PathType.LogName, queryString);
+            EventLogQuery query = new EventLogQuery("Microsoft-Windows-Sysmon/Operational", PathType.LogName , queryString);
             query.Session = session;
 
             try

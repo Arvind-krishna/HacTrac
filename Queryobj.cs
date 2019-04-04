@@ -12,7 +12,7 @@ namespace HacTrac
         public string password;
         public string IP;
         public string domain = null;
-        public string query;
+        
 
 
         public Queryobj(string UnameBox, string PassBox, string IPbox, string DomBox)

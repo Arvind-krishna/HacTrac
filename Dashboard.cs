@@ -23,10 +23,12 @@ namespace HacTrac
         private void button1_Click(object sender, EventArgs e)
         {
             log l = new log();
-            string query = "*[System[(Level = 1  or Level = 4 or Level = 0 or Level = 5)]]";
-            DataSet ds = l.QueryRemoteComputer(query,a);
+            string query = "*";
+            DataSet ds = new DataSet();
+            ds =  l.QueryRemoteComputer(query,a);
             dataGridView1.DataSource = ds; // dataset
             dataGridView1.DataMember = "Events";
+            
         }
     }
 }

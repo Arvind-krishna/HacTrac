@@ -29,7 +29,7 @@ namespace HacTrac
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (DomBox.Enabled = true && DomBox.Text != "") DomBox.Text = null;
+            if (DomBox.Enabled = false || DomBox.Text == "") DomBox.Text = null;
             
 
              Queryobj a = new Queryobj(UnameBox.Text, PassBox.Text, IPbox.Text, DomBox.Text);
