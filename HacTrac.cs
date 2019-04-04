@@ -33,7 +33,7 @@ namespace HacTrac
             
 
              Queryobj a = new Queryobj(UnameBox.Text, PassBox.Text, IPbox.Text, DomBox.Text);
-            this.Hide();
+             this.Hide();
              new Dashboard(a).Show();
             
 

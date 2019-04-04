@@ -42,17 +42,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // IPbox
             // 
-            this.IPbox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.IPbox.Location = new System.Drawing.Point(208, 96);
+            this.IPbox.Location = new System.Drawing.Point(181, 117);
             this.IPbox.Name = "IPbox";
-            this.IPbox.Size = new System.Drawing.Size(151, 20);
+            this.IPbox.Size = new System.Drawing.Size(166, 20);
             this.IPbox.TabIndex = 0;
             // 
             // contextMenuStrip1
@@ -62,19 +60,16 @@
             // 
             // DomBox
             // 
-            this.DomBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.DomBox.Enabled = false;
-            this.DomBox.Location = new System.Drawing.Point(208, 286);
+            this.DomBox.Location = new System.Drawing.Point(181, 307);
             this.DomBox.Name = "DomBox";
-            this.DomBox.Size = new System.Drawing.Size(151, 20);
+            this.DomBox.Size = new System.Drawing.Size(166, 20);
             this.DomBox.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(57, 99);
+            this.label1.Location = new System.Drawing.Point(30, 120);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(135, 13);
             this.label1.TabIndex = 3;
@@ -83,7 +78,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(137, 145);
+            this.label2.Location = new System.Drawing.Point(110, 166);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(55, 13);
             this.label2.TabIndex = 4;
@@ -115,10 +110,9 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(167, 218);
+            this.groupBox1.Location = new System.Drawing.Point(155, 237);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(192, 53);
             this.groupBox1.TabIndex = 7;
@@ -126,23 +120,23 @@
             // 
             // UnameBox
             // 
-            this.UnameBox.Location = new System.Drawing.Point(210, 142);
+            this.UnameBox.Location = new System.Drawing.Point(183, 163);
             this.UnameBox.Name = "UnameBox";
-            this.UnameBox.Size = new System.Drawing.Size(149, 20);
+            this.UnameBox.Size = new System.Drawing.Size(164, 20);
             this.UnameBox.TabIndex = 8;
             // 
             // PassBox
             // 
-            this.PassBox.Location = new System.Drawing.Point(210, 181);
+            this.PassBox.Location = new System.Drawing.Point(183, 202);
             this.PassBox.Name = "PassBox";
             this.PassBox.PasswordChar = '✸';
-            this.PassBox.Size = new System.Drawing.Size(149, 20);
+            this.PassBox.Size = new System.Drawing.Size(164, 20);
             this.PassBox.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(137, 184);
+            this.label3.Location = new System.Drawing.Point(110, 205);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 9;
@@ -151,7 +145,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(116, 289);
+            this.label4.Location = new System.Drawing.Point(89, 310);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 11;
@@ -159,7 +153,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(208, 349);
+            this.button1.Location = new System.Drawing.Point(181, 370);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(143, 38);
             this.button1.TabIndex = 12;
@@ -167,11 +161,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(126, 48);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(254, 26);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "HacTrac : Remote Logger";
+            // 
             // HacTrac
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(795, 450);
+            this.ClientSize = new System.Drawing.Size(499, 455);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.PassBox);
@@ -206,5 +211,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label5;
     }
 }
