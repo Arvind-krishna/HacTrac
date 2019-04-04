@@ -39,5 +39,10 @@ namespace HacTrac
 
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            new Dashboard(null).Show();
+        }
     }
 }

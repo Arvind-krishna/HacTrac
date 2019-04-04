@@ -12,6 +12,7 @@ namespace HacTrac
         public string password;
         public string IP;
         public string domain = null;
+        public string logname;
         
 
 

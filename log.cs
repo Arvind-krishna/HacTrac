@@ -9,44 +9,84 @@ using System.Threading.Tasks;
 
 namespace HacTrac
 {
+    enum mode { security, sysmon };
     class log
 
     {
+
         DataSet data = new DataSet();
-        private void DisplayEventAndLogInformation(EventLogReader logreader)
+        private void DisplayEventAndLogInformation(EventLogReader logreader, mode m)
 
         {
             DataSet ds = new DataSet();
-            ds.Tables.Add("Events");
-            ds.Tables["Events"].Columns.Add("Level");
-            ds.Tables["Events"].Columns.Add("Time");
-            ds.Tables["Events"].Columns.Add("Event ID");
-            ds.Tables["Events"].Columns.Add("Task");
-            ds.Tables["Events"].Columns.Add("User");
-            ds.Tables["Events"].Columns.Add("Operation");
-            ds.Tables["Events"].Columns.Add("XML");
 
-
-
-            for (EventRecord eventInstance = logreader.ReadEvent();
-
-                null != eventInstance; eventInstance = logreader.ReadEvent())
-
+            if (m == mode.sysmon)
             {
 
-                ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName,eventInstance.TimeCreated,eventInstance.Id,eventInstance.TaskDisplayName,eventInstance.UserId,eventInstance.OpcodeDisplayName, eventInstance.ToXml());
-                
+                ds.Tables.Add("Events");
+                ds.Tables["Events"].Columns.Add("Level");
+                ds.Tables["Events"].Columns.Add("Time");
+                ds.Tables["Events"].Columns.Add("Event ID");
+                ds.Tables["Events"].Columns.Add("Task");
+                ds.Tables["Events"].Columns.Add("User");
+                ds.Tables["Events"].Columns.Add("Operation");
 
-               
 
-                
-                
+                int i = 0;
+
+                for (EventRecord eventInstance = logreader.ReadEvent();
+
+                    null != eventInstance; eventInstance = logreader.ReadEvent())
+
+                {
+
+                    ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName);
+
+
+                    if (i > 100) break;
+
+
+
+
+                }
+
+                data = ds;
+
+            }
+            else
+            {
+
+                ds.Tables.Add("Events");
+                ds.Tables["Events"].Columns.Add("Level");
+                ds.Tables["Events"].Columns.Add("Time");
+                ds.Tables["Events"].Columns.Add("Event ID");
+                ds.Tables["Events"].Columns.Add("Task");
+                ds.Tables["Events"].Columns.Add("Source");
+
+
+
+
+                int i = 0;
+                for (EventRecord eventInstance = logreader.ReadEvent();
+
+                    null != eventInstance; eventInstance = logreader.ReadEvent())
+
+                {
+
+                    ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.ProviderName);
+
+                    ++i;
+                    if (i > 100) break;
+
+
+                }
+
+                data = ds;
 
             }
 
-            data = ds;
-
         }
+
         public static SecureString GetPassword(string inputString)
 
         {
@@ -66,8 +106,11 @@ namespace HacTrac
             return secureString;
 
         }
-        public DataSet QueryRemoteComputer(string querystring,Queryobj o)
+
+
+        internal DataSet QueryRemoteComputer(string querystring, Queryobj o, mode a)
         {
+
             string queryString = querystring; // XPATH Query
             SecureString pw = GetPassword(o.password);
 
@@ -81,7 +124,7 @@ namespace HacTrac
             pw.Dispose();
 
             // Query the Application log on the remote computer.
-            EventLogQuery query = new EventLogQuery("Microsoft-Windows-Sysmon/Operational", PathType.LogName , queryString);
+            EventLogQuery query = new EventLogQuery(o.logname, PathType.LogName, queryString);
             query.Session = session;
 
             try
@@ -89,15 +132,16 @@ namespace HacTrac
                 EventLogReader logReader = new EventLogReader(query);
 
                 // Display event info
-                 DisplayEventAndLogInformation(logReader);
+                DisplayEventAndLogInformation(logReader, a);
 
             }
             catch (EventLogException e)
             {
                 Console.WriteLine("Could not query the remote computer! " + e.Message);
-                
+
             }
             return data;
         }
     }
 }
+        
