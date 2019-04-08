@@ -53,12 +53,16 @@ namespace HacTrac
             try
             {
                 string xml = dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString();
+                saveFileDialog1.Title = "Download Event XML";
+                saveFileDialog1.DefaultExt = "txt";
+                saveFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
 
-                MessageBox.Show(xml);
-                File.WriteAllText("t.xml", xml);
+                saveFileDialog1.ShowDialog();
+                
+                File.WriteAllText(saveFileDialog1.FileName, xml);
             }
             catch (Exception)
-            { MessageBox.Show("Please select an event to download XML"); }
+            { MessageBox.Show("Error"); }
            
         }
 
