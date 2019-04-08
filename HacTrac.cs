@@ -36,10 +36,12 @@ namespace HacTrac
              Queryobj a = new Queryobj(UnameBox.Text, PassBox.Text, IPbox.Text, DomBox.Text);
              this.Hide();
             Ping myPing = new Ping();
-            PingReply reply = myPing.Send("192.168.1.3", 1000);
-            if (reply != null)
+            PingReply reply = myPing.Send(IPbox.Text, 1000);
+            if (reply.Status.ToString().Equals("Success"))
 
-            { new Dashboard(a).Show(); }
+            {
+                this.Hide();
+                new Dashboard(a).Show(); }
 
             else MessageBox.Show("Remote Machine not reachable. Please check, and try again");
                 

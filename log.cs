@@ -44,7 +44,7 @@ namespace HacTrac
                     ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName, eventInstance.ToXml());
 
                     ++i;
-                    if (i > 10) break;
+                    if (i > 100) break;
 
 
 
@@ -78,7 +78,7 @@ namespace HacTrac
                     ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.ProviderName,eventInstance.ToXml());
 
                     ++i;
-                    if (i > 10) break;
+                    if (i > 100) break;
 
 
                 }
