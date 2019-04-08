@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +44,27 @@ namespace HacTrac
             dataGridView1.DataSource = ds; // dataset
             dataGridView1.DataMember = "Events";
 
+        }
+
+        private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            BtnXML.Enabled = true;
+        }
+
+       
+
+        private void BtnXML_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string xml = dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString();
+
+                MessageBox.Show(xml);
+                File.WriteAllText("t.xml", xml);
+            }
+            catch (Exception e)
+            { MessageBox.Show("Please select an event to download XML"); }
+           
         }
     }
 }

@@ -8,6 +8,7 @@ Import-Module "$Global:g_CurrentDir\CredentialManager"
 Function Install-LocalCredentialConfiguration
 {
     param([string] $configfile)
+   
 
     if(Test-Path $configfile){
         $current_config = Get-Content  $configfile | ConvertFrom-Csv
@@ -15,6 +16,7 @@ Function Install-LocalCredentialConfiguration
             if($line.service -match "termsrv")
             {
                 write-host "New-StoredCredential -Target TERMSRV/$($line.server) -UserName $($line.username) "
+                write-host "$Global:g_CurrentDir"
                 New-StoredCredential -Target "TERMSRV/$($line.server)" -UserName $line.username -Password $line.password -Type DomainPassword -Persist LocalMachine
             }
             else {
@@ -36,11 +38,27 @@ Function Remove-LocalCredentialConfiguration
     if(Test-Path $configfile){
         $current_config = Get-Content  $configfile | ConvertFrom-Csv
         foreach($line in $current_config) {
-            Remove-StoredCredential -Target $($line.server) -Type DomainPassword 
+
+         if($line.service -match "termsrv")
+         { 
+            Remove-StoredCredential -Target "TERMSRV/$($line.server)" -Type DomainPassword }
+         else
+         {
+            Remove-StoredCredential -Target $line.server -Type DomainPassword }
         }
         return $true
     }
     return $false
+}
+
+Function Get-LocalCredentialConfiguration
+{
+    
+         $p = Get-StoredCredential -AsCredentialObject 
+         $p | ConvertTo-Csv | Out-File fields.csv
+
+         
+    
 }
 
 
@@ -68,7 +86,7 @@ Function Remove-DomainCredentialConfiguration {
         $current_config = Get-Content  $configfile | ConvertFrom-Csv
         foreach($line in $current_config) {
             # Call function to create domain user here
-            & net user $line.username $line.password /delete /domain
+            & net user $line.username /delete /domain
         }
         return $true
     }

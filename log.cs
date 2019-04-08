@@ -30,6 +30,7 @@ namespace HacTrac
                 ds.Tables["Events"].Columns.Add("Task");
                 ds.Tables["Events"].Columns.Add("User");
                 ds.Tables["Events"].Columns.Add("Operation");
+                ds.Tables["Events"].Columns.Add("XML");
 
 
                 int i = 0;
@@ -40,10 +41,10 @@ namespace HacTrac
 
                 {
 
-                    ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName);
+                    ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName, eventInstance.ToXml());
 
-
-                    if (i > 100) break;
+                    ++i;
+                    if (i > 10) break;
 
 
 
@@ -62,6 +63,7 @@ namespace HacTrac
                 ds.Tables["Events"].Columns.Add("Event ID");
                 ds.Tables["Events"].Columns.Add("Task");
                 ds.Tables["Events"].Columns.Add("Source");
+                ds.Tables["Events"].Columns.Add("XML");
 
 
 
@@ -73,10 +75,10 @@ namespace HacTrac
 
                 {
 
-                    ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.ProviderName);
+                    ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.ProviderName,eventInstance.ToXml());
 
                     ++i;
-                    if (i > 100) break;
+                    if (i > 10) break;
 
 
                 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -34,7 +35,14 @@ namespace HacTrac
 
              Queryobj a = new Queryobj(UnameBox.Text, PassBox.Text, IPbox.Text, DomBox.Text);
              this.Hide();
-             new Dashboard(a).Show();
+            Ping myPing = new Ping();
+            PingReply reply = myPing.Send("192.168.1.3", 1000);
+            if (reply != null)
+
+            { new Dashboard(a).Show(); }
+
+            else MessageBox.Show("Remote Machine not reachable. Please check, and try again");
+                
             
 
 
