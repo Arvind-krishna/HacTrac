@@ -1,6 +1,6 @@
 ﻿namespace HacTrac
 {
-    partial class Dashboard
+    partial class Dash
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnFetch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BtnXML = new System.Windows.Forms.Button();
@@ -41,6 +41,8 @@
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.Keywords = new System.Windows.Forms.CheckBox();
             this.timebox = new System.Windows.Forms.ComboBox();
+            this.LevelList = new System.Windows.Forms.CheckedListBox();
+            this.Levelbox = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -64,14 +66,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -184,11 +186,39 @@
             this.timebox.Size = new System.Drawing.Size(121, 21);
             this.timebox.TabIndex = 15;
             // 
-            // Dashboard
+            // LevelList
+            // 
+            this.LevelList.Enabled = false;
+            this.LevelList.FormattingEnabled = true;
+            this.LevelList.Items.AddRange(new object[] {
+            "Critical",
+            "Error",
+            "Warning",
+            "Information",
+            "Verbose"});
+            this.LevelList.Location = new System.Drawing.Point(641, 566);
+            this.LevelList.Name = "LevelList";
+            this.LevelList.Size = new System.Drawing.Size(88, 94);
+            this.LevelList.TabIndex = 17;
+            // 
+            // Levelbox
+            // 
+            this.Levelbox.AutoSize = true;
+            this.Levelbox.Location = new System.Drawing.Point(641, 536);
+            this.Levelbox.Name = "Levelbox";
+            this.Levelbox.Size = new System.Drawing.Size(67, 17);
+            this.Levelbox.TabIndex = 18;
+            this.Levelbox.Text = "By Level";
+            this.Levelbox.UseVisualStyleBackColor = true;
+            this.Levelbox.CheckedChanged += new System.EventHandler(this.Levelbox_CheckedChanged);
+            // 
+            // Dash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1467, 799);
+            this.Controls.Add(this.Levelbox);
+            this.Controls.Add(this.LevelList);
             this.Controls.Add(this.timebox);
             this.Controls.Add(this.Keywords);
             this.Controls.Add(this.groupBox1);
@@ -198,7 +228,7 @@
             this.Controls.Add(this.BtnXML);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.BtnFetch);
-            this.Name = "Dashboard";
+            this.Name = "Dash";
             this.Text = "Sysmon";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -222,6 +252,8 @@
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
         private System.Windows.Forms.CheckBox Keywords;
         private System.Windows.Forms.ComboBox timebox;
+        private System.Windows.Forms.CheckedListBox LevelList;
+        private System.Windows.Forms.CheckBox Levelbox;
     }
 }
 

@@ -43,7 +43,7 @@ namespace HacTrac
 
                 {
                     this.Hide();
-                    new Dashboard(a).Show();
+                    new Dash(a).Show();
                 }
 
                 else MessageBox.Show("Remote Machine not reachable. Please check, and try again");
@@ -56,7 +56,7 @@ namespace HacTrac
 
         private void button2_Click(object sender, EventArgs e)
         {
-            new Dashboard(null).Show();
+            new Dash(null).Show();
         }
     }
 }

@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace HacTrac
 {
-    public partial class Dashboard : Form
+    public partial class Dash : Form
     {
         Queryobj a = new Queryobj();
         String query;
         Boolean filter;
         
 
-        public Dashboard(Queryobj o)
+        public Dash(Queryobj o)
         {
             InitializeComponent();
             a = o;
@@ -50,6 +50,7 @@ namespace HacTrac
         {
             if (EventID.Checked) filter = true;
             if (Keywords.Checked) filter = true;
+            if (Levelbox.Checked) filter = true;
         }
        
 
@@ -79,15 +80,17 @@ namespace HacTrac
             {
                 if (TxtEventID.Text != "")
 
-                { string subquery = "(EventID=" + TxtEventID.Text + ")";
+                {
+                    string subquery = "(EventID=" + TxtEventID.Text + ")";
                     query += subquery;
-                    count++; }
-                
-                
-            } 
-        
-                
-        
+                    count++;
+                }
+
+
+            }
+
+
+
             if (Keywords.Checked)
             {
                 if (count > 0) { query += " and "; --count; }
@@ -95,7 +98,7 @@ namespace HacTrac
                 switch (timebox.SelectedIndex)
                 {
                     case 0:
-                        t = "3600000";  break;
+                        t = "3600000"; break;
 
                     case 1:
                         t = "43200000"; break;
@@ -109,7 +112,7 @@ namespace HacTrac
                     case 4:
                         t = "2592000000"; break;
 
-                     default:
+                    default:
                         t = "3600000"; break;
 
 
@@ -117,12 +120,79 @@ namespace HacTrac
                 string subquery = String.Format("TimeCreated[timediff(@SystemTime) &lt;= {0}]", t);
                 MessageBox.Show(subquery);
 
-                
+
                 query += subquery;
                 MessageBox.Show(query);
+                ++count;
             }
-                query += "]]";
 
+            if (Levelbox.Checked)
+
+            {
+                string subquery="";
+                if (count > 0) { query += " and "; --count; }
+
+               
+                if (LevelList.CheckedIndices.Count > 0)
+                {
+                    int countr=0;
+                    subquery += "(";
+                    foreach (int a in LevelList.CheckedIndices)
+                    {
+                        switch (a)
+                        {
+                            case 0:
+                                if (countr > 0) { subquery += " or "; --countr; }
+
+                                subquery += "Level=1";
+                                ++countr;
+
+                                break;
+
+                            case 1:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "Level=2";
+                                ++countr;
+                                break;
+
+                            case 2:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "Level=3";
+                                ++countr;
+                                break;
+
+                            case 3:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "Level=4 or Level=0";
+                                ++countr;
+                                break;
+
+                            case 4:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "Level=5";
+                                ++countr;
+                                break;
+
+
+                            default:
+                                break;
+
+
+                        }
+
+
+                    }
+                    subquery += ")";
+                    query += subquery;
+                    ++count;
+                    MessageBox.Show(query);                }
+               
+
+            }
+
+
+
+            query += "]]";
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
@@ -178,6 +248,12 @@ namespace HacTrac
 
             }
 
+        }
+
+        private void Levelbox_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Levelbox.Checked) { LevelList.Enabled = true; }
+            else LevelList.Enabled = false;
         }
     }
 }
