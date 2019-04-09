@@ -117,7 +117,7 @@ namespace HacTrac
 
 
                 }
-                string subquery = String.Format("TimeCreated[timediff(@SystemTime) &lt;= {0}]", t);
+                string subquery = String.Format("TimeCreated[timediff(@SystemTime) <= {0}]", t);
                 MessageBox.Show(subquery);
 
 
