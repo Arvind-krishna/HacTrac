@@ -36,16 +36,20 @@ namespace HacTrac
              Queryobj a = new Queryobj(UnameBox.Text, PassBox.Text, IPbox.Text, DomBox.Text);
              this.Hide();
             Ping myPing = new Ping();
-            PingReply reply = myPing.Send(IPbox.Text, 1000);
-            if (reply.Status.ToString().Equals("Success"))
-
+            try
             {
-                this.Hide();
-                new Dashboard(a).Show(); }
+                PingReply reply = myPing.Send(IPbox.Text, 1000);
+                if (reply.Status.ToString().Equals("Success"))
 
-            else MessageBox.Show("Remote Machine not reachable. Please check, and try again");
-                
-            
+                {
+                    this.Hide();
+                    new Dashboard(a).Show();
+                }
+
+                else MessageBox.Show("Remote Machine not reachable. Please check, and try again");
+            }
+
+            catch (Exception) { MessageBox.Show("An error was encountered. Please try again"); }
 
 
         }

@@ -46,6 +46,11 @@ namespace HacTrac
             BtnXML.Enabled = true;
         }
 
+        private void CheckFilter()
+        {
+            if (EventID.Checked) filter = true;
+            if (Keywords.Checked) filter = true;
+        }
        
 
         private void BtnXML_Click(object sender, EventArgs e)
@@ -71,19 +76,59 @@ namespace HacTrac
             int count = 0;
             query = "*[System[";
             if (EventID.Checked)
-                if (TxtEventID.Text == "") MessageBox.Show("Please enter an Event ID");
             {
-                string subquery = "(EventID=" + TxtEventID.Text + ")";
-                query += subquery;
-                count = 1;
-            }
+                if (TxtEventID.Text != "")
 
-             query += "]]";
+                { string subquery = "(EventID=" + TxtEventID.Text + ")";
+                    query += subquery;
+                    count++; }
+                
+                
+            } 
+        
+                
+        
+            if (Keywords.Checked)
+            {
+                if (count > 0) { query += " and "; --count; }
+                string t;
+                switch (timebox.SelectedIndex)
+                {
+                    case 0:
+                        t = "3600000";  break;
+
+                    case 1:
+                        t = "43200000"; break;
+
+                    case 2:
+                        t = "86400000"; break;
+
+                    case 3:
+                        t = "604800000"; break;
+
+                    case 4:
+                        t = "2592000000"; break;
+
+                     default:
+                        t = "3600000"; break;
+
+
+                }
+                string subquery = String.Format("TimeCreated[timediff(@SystemTime) &lt;= {0}]", t);
+                MessageBox.Show(subquery);
+
+                
+                query += subquery;
+                MessageBox.Show(query);
+            }
+                query += "]]";
 
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
+            CheckFilter();
+
             if (filter==true) GenerateQuery(); else query = "*";
             
             log l = new log();
@@ -108,13 +153,31 @@ namespace HacTrac
             if (EventID.Checked)
             {
                 TxtEventID.Enabled = true;
-                filter = true;
+                
             }
             else
             {
                 TxtEventID.Enabled = false;
-                filter = false;
+                
             }
+        }
+
+        private void Keywords_CheckedChanged(object sender, EventArgs e)
+        {
+            if (Keywords.Checked)
+            {
+                timebox.Enabled = true;
+
+
+            }
+            else
+            {
+                timebox.Enabled = false;
+
+
+
+            }
+
         }
     }
 }

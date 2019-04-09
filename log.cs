@@ -25,6 +25,8 @@ namespace HacTrac
 
                 ds.Tables.Add("Events");
                 ds.Tables["Events"].Columns.Add("Level");
+                
+
                 ds.Tables["Events"].Columns.Add("Time");
                 ds.Tables["Events"].Columns.Add("Event ID");
                 ds.Tables["Events"].Columns.Add("Task");
@@ -44,7 +46,7 @@ namespace HacTrac
                     ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName, eventInstance.ToXml());
 
                     ++i;
-                    if (i > 100) break;
+                    if (i > 10) break;
 
 
 
@@ -78,7 +80,7 @@ namespace HacTrac
                     ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.ProviderName,eventInstance.ToXml());
 
                     ++i;
-                    if (i > 100) break;
+                    if (i > 10) break;
 
 
                 }
@@ -89,41 +91,23 @@ namespace HacTrac
 
         }
 
-        public static SecureString GetPassword(string inputString)
-
-        {
-
-            SecureString secureString = new SecureString();
-
-
-
-            foreach (Char character in inputString)
-
-            {
-
-                secureString.AppendChar(character);
-
-            }
-
-            return secureString;
-
-        }
+        
 
 
         internal DataSet QueryRemoteComputer(string querystring, Queryobj o, mode a)
         {
 
             string queryString = querystring; // XPATH Query
-            SecureString pw = GetPassword(o.password);
+            
 
             EventLogSession session = new EventLogSession(
                 o.IP,                               // Remote Computer
                 o.domain,                                  // Domain
                 o.username,                                // Username
-                pw,
+                o.password,
                 SessionAuthentication.Default);
 
-            pw.Dispose();
+            
 
             // Query the Application log on the remote computer.
             EventLogQuery query = new EventLogQuery(o.logname, PathType.LogName, queryString);

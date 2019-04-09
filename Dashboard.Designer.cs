@@ -39,6 +39,8 @@
             this.RadioSecurity = new System.Windows.Forms.RadioButton();
             this.RadioSysmon = new System.Windows.Forms.RadioButton();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.Keywords = new System.Windows.Forms.CheckBox();
+            this.timebox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -82,7 +84,7 @@
             // BtnXML
             // 
             this.BtnXML.Enabled = false;
-            this.BtnXML.Location = new System.Drawing.Point(296, 712);
+            this.BtnXML.Location = new System.Drawing.Point(52, 645);
             this.BtnXML.Name = "BtnXML";
             this.BtnXML.Size = new System.Drawing.Size(141, 33);
             this.BtnXML.TabIndex = 3;
@@ -93,14 +95,14 @@
             // TxtEventID
             // 
             this.TxtEventID.Enabled = false;
-            this.TxtEventID.Location = new System.Drawing.Point(701, 642);
+            this.TxtEventID.Location = new System.Drawing.Point(437, 517);
             this.TxtEventID.Name = "TxtEventID";
-            this.TxtEventID.Size = new System.Drawing.Size(89, 20);
+            this.TxtEventID.Size = new System.Drawing.Size(101, 20);
             this.TxtEventID.TabIndex = 4;
             // 
             // BtnApply
             // 
-            this.BtnApply.Location = new System.Drawing.Point(640, 687);
+            this.BtnApply.Location = new System.Drawing.Point(371, 645);
             this.BtnApply.Name = "BtnApply";
             this.BtnApply.Size = new System.Drawing.Size(141, 33);
             this.BtnApply.TabIndex = 10;
@@ -111,7 +113,7 @@
             // EventID
             // 
             this.EventID.AutoSize = true;
-            this.EventID.Location = new System.Drawing.Point(612, 645);
+            this.EventID.Location = new System.Drawing.Point(344, 517);
             this.EventID.Name = "EventID";
             this.EventID.Size = new System.Drawing.Size(83, 17);
             this.EventID.TabIndex = 11;
@@ -154,14 +156,41 @@
             // 
             // saveFileDialog1
             // 
-            
             this.saveFileDialog1.DefaultExt = "xml";
+            // 
+            // Keywords
+            // 
+            this.Keywords.AutoSize = true;
+            this.Keywords.Location = new System.Drawing.Point(344, 580);
+            this.Keywords.Name = "Keywords";
+            this.Keywords.Size = new System.Drawing.Size(97, 17);
+            this.Keywords.TabIndex = 14;
+            this.Keywords.Text = "By Time Period";
+            this.Keywords.UseVisualStyleBackColor = true;
+            this.Keywords.CheckedChanged += new System.EventHandler(this.Keywords_CheckedChanged);
+            // 
+            // timebox
+            // 
+            this.timebox.Enabled = false;
+            this.timebox.FormattingEnabled = true;
+            this.timebox.Items.AddRange(new object[] {
+            "Last Hour",
+            "Last 12 Hours",
+            "Last 24 Hours",
+            "Last 7 Days",
+            "Last 30 Days"});
+            this.timebox.Location = new System.Drawing.Point(447, 578);
+            this.timebox.Name = "timebox";
+            this.timebox.Size = new System.Drawing.Size(121, 21);
+            this.timebox.TabIndex = 15;
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1467, 799);
+            this.Controls.Add(this.timebox);
+            this.Controls.Add(this.Keywords);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.EventID);
             this.Controls.Add(this.BtnApply);
@@ -191,6 +220,8 @@
         private System.Windows.Forms.RadioButton RadioSecurity;
         private System.Windows.Forms.RadioButton RadioSysmon;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.CheckBox Keywords;
+        private System.Windows.Forms.ComboBox timebox;
     }
 }
 
