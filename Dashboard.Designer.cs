@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnFetch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BtnXML = new System.Windows.Forms.Button();
@@ -55,6 +55,7 @@
             // 
             // BtnFetch
             // 
+            this.BtnFetch.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnFetch.Location = new System.Drawing.Point(83, 578);
             this.BtnFetch.Name = "BtnFetch";
             this.BtnFetch.Size = new System.Drawing.Size(118, 42);
@@ -68,18 +69,19 @@
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.dataGridView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -91,6 +93,7 @@
             // 
             // BtnXML
             // 
+            this.BtnXML.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnXML.Enabled = false;
             this.BtnXML.Location = new System.Drawing.Point(71, 657);
             this.BtnXML.Name = "BtnXML";
@@ -102,6 +105,7 @@
             // 
             // TxtEventID
             // 
+            this.TxtEventID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.TxtEventID.Enabled = false;
             this.TxtEventID.Location = new System.Drawing.Point(456, 529);
             this.TxtEventID.Name = "TxtEventID";
@@ -110,6 +114,7 @@
             // 
             // BtnApply
             // 
+            this.BtnApply.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnApply.Location = new System.Drawing.Point(390, 657);
             this.BtnApply.Name = "BtnApply";
             this.BtnApply.Size = new System.Drawing.Size(141, 33);
@@ -120,6 +125,7 @@
             // 
             // EventID
             // 
+            this.EventID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.EventID.AutoSize = true;
             this.EventID.Location = new System.Drawing.Point(349, 529);
             this.EventID.Name = "EventID";
@@ -131,6 +137,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox1.Controls.Add(this.RadioSecurity);
             this.groupBox1.Controls.Add(this.RadioSysmon);
             this.groupBox1.Location = new System.Drawing.Point(63, 498);
@@ -168,6 +175,7 @@
             // 
             // Keywords
             // 
+            this.Keywords.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Keywords.AutoSize = true;
             this.Keywords.Location = new System.Drawing.Point(349, 592);
             this.Keywords.Name = "Keywords";
@@ -179,6 +187,7 @@
             // 
             // timebox
             // 
+            this.timebox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.timebox.Enabled = false;
             this.timebox.FormattingEnabled = true;
             this.timebox.Items.AddRange(new object[] {
@@ -194,6 +203,7 @@
             // 
             // LevelList
             // 
+            this.LevelList.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.LevelList.ColumnWidth = 200;
             this.LevelList.Enabled = false;
             this.LevelList.FormattingEnabled = true;
@@ -216,6 +226,7 @@
             // 
             // Levelbox
             // 
+            this.Levelbox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Levelbox.AutoSize = true;
             this.Levelbox.Location = new System.Drawing.Point(622, 528);
             this.Levelbox.Name = "Levelbox";
@@ -227,6 +238,7 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(619, 667);
             this.label1.Name = "label1";
@@ -236,6 +248,7 @@
             // 
             // label2
             // 
+            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(734, 667);
             this.label2.Name = "label2";
@@ -245,6 +258,7 @@
             // 
             // numericUpDown1
             // 
+            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.numericUpDown1.Increment = new decimal(new int[] {
             10,
             0,
@@ -267,6 +281,7 @@
             // 
             // button1
             // 
+            this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.button1.Location = new System.Drawing.Point(810, 657);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(229, 33);

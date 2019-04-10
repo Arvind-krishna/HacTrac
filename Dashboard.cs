@@ -237,8 +237,9 @@ namespace HacTrac
 
 
 
-                query += "]]";
+                
             }
+            query += "]]";
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
