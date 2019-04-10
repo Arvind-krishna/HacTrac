@@ -46,16 +46,70 @@ if( Test-Connection -ComputerName $ComputerName -Count 1 -ErrorAction SilentlyCo
         return
     }
 
+    #-- If you reached here, then drive has been mapped.
+    Write-Host "Drive has been mapped as V:\ "
+    
+
+    #-- Define a cleanup function to unmap the network drive
+    Function UnmapAndContinue {
+        net use V: /delete
+        if($LASTEXITCODE)
+        {
+            Write-Host "Failed to unmap network drive"
+            return
+        }
+    }
+
     # Copy SysmonConfigFolder to remote machine
     copy $SysmonConfigFolder V:\
     if($LASTEXITCODE)
     {
         Write-Host "Failed to copy $SysmonConfigFolder to v:\"
-        goto UnmapAndContinue
+        UnmapAndContinue()
+        return
     }
 
     Write-Host " All success ? "
 
+    #-- Enable auditing : Account Management success
+    try{
+        Write-Host "Attempting to execute: Auditpol /set /category:`"Account Management`" /success:enable"
+        $proc = Invoke-WmiMethod -ComputerName $ComputerName -Class Win32_Process -Name Create -ArgumentList "Auditpol /set /category:`"Account Management`" /success:enable" -Credential $Creds
+        Write-Host "Created Process on " $ComputerName " with process id:" $proc.ProcessId 
+    }
+    catch {
+        Write-Host "Exception when invoking Win32_Process.Create."
+        Write-Host $_.Exception.GetType().FullName, $_.Exception.Message
+    }
+
+    #-- Enable auditing : Account Management failure
+    try{
+        Write-Host "Attempting to execute: Auditpol /set /category:`"Account Management`" /failure:enable"
+        $proc = Invoke-WmiMethod -ComputerName $ComputerName -Class Win32_Process -Name Create -ArgumentList "Auditpol /set /category:`"Account Management`" /failure:enable" -Credential $Creds
+        Write-Host "Created Process on " $ComputerName " with process id:" $proc.ProcessId 
+    }
+    catch {
+        Write-Host "Exception when invoking Win32_Process.Create."
+        Write-Host $_.Exception.GetType().FullName, $_.Exception.Message
+    }
+
+    #-- enable other auditing as required.. you get the idea
+    # see auditpol.exe's help for more details
+
+
+    #-- Need to find the proper sysmon path and command and call it here
+    <#-- Enable auditing : Account Management failure
+    try{
+        Write-Host "Attempting to execute: C:\sysmon.exe"
+        $proc = Invoke-WmiMethod -ComputerName $ComputerName -Class Win32_Process -Name Create -ArgumentList "Auditpol /set /category:`"Account Management`" /failure:enable" -Credential $Creds
+        Write-Host "Created Process on " $ComputerName " with process id:" $proc.ProcessId 
+    }
+    catch {
+        Write-Host "Exception when invoking Win32_Process.Create."
+        Write-Host $_.Exception.GetType().FullName, $_.Exception.Message
+    }#>
+
+    UnmapAndContinue()
 } else {
     Write-Host "$ComputerName is not reachable. Unable to continue..."
     return
