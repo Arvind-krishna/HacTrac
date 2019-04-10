@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace HacTrac
 {
@@ -16,7 +17,7 @@ namespace HacTrac
         Queryobj a = new Queryobj();
         String query;
         Boolean filter;
-        
+
 
         public Dash(Queryobj o)
         {
@@ -32,14 +33,18 @@ namespace HacTrac
             mode m;
             if (RadioSysmon.Checked) { a.logname = "Microsoft-Windows-Sysmon/Operational"; m = mode.sysmon; }
             else { a.logname = "Security"; m = mode.security; }
+            log.viewcount = (int)numericUpDown1.Value;
+            ds = l.QueryRemoteComputer(query, a, m);
+            try
+            {
+                dataGridView1.DataSource = ds; // dataset
+                dataGridView1.DataMember = "Events";
+            }
+            catch (Exception) { MessageBox.Show("Bad Query/Nothing to show"); }
 
-                ds =  l.QueryRemoteComputer(query,a,m);
-            dataGridView1.DataSource = ds; // dataset
-            dataGridView1.DataMember = "Events";
-            
         }
 
-       
+
 
         private void dataGridView1_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
@@ -52,25 +57,34 @@ namespace HacTrac
             if (Keywords.Checked) filter = true;
             if (Levelbox.Checked) filter = true;
         }
-       
+
 
         private void BtnXML_Click(object sender, EventArgs e)
         {
             try
             {
-                string xml = dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString();
-                saveFileDialog1.Title = "Download Event XML";
-                saveFileDialog1.DefaultExt = "txt";
-                saveFileDialog1.Filter = "XML files (*.xml)|*.xml|All files (*.*)|*.*";
 
-                saveFileDialog1.ShowDialog();
-                
+
+
+                string xml = dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString();
+               
+
+                StringReader theReader = new StringReader(xml);
+                if (saveFileDialog1.ShowDialog()==DialogResult.OK)
                 File.WriteAllText(saveFileDialog1.FileName, xml);
+                MessageBox.Show("Success");
+                
             }
-            catch (Exception)
-            { MessageBox.Show("Error"); }
-           
+            catch (Exception) { }
         }
+       
+
+
+
+
+
+
+
 
         private void GenerateQuery()
         {
@@ -129,13 +143,13 @@ namespace HacTrac
             if (Levelbox.Checked)
 
             {
-                string subquery="";
+                string subquery = "";
                 if (count > 0) { query += " and "; --count; }
 
-               
+
                 if (LevelList.CheckedIndices.Count > 0)
                 {
-                    int countr=0;
+                    int countr = 0;
                     subquery += "(";
                     foreach (int a in LevelList.CheckedIndices)
                     {
@@ -144,34 +158,65 @@ namespace HacTrac
                             case 0:
                                 if (countr > 0) { subquery += " or "; --countr; }
 
-                                subquery += "Level=1";
+                                subquery += "EventID=11";
                                 ++countr;
 
                                 break;
 
                             case 1:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "Level=2";
+                                subquery += "EventID=1";
                                 ++countr;
                                 break;
 
                             case 2:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "Level=3";
+                                subquery += "EventID=3";
                                 ++countr;
                                 break;
 
                             case 3:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "Level=4 or Level=0";
+                                subquery += "EventID=";
                                 ++countr;
                                 break;
 
                             case 4:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "Level=5";
+                                subquery += "EventID=10";
                                 ++countr;
                                 break;
+
+                            case 5:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "EventID=12";
+                                ++countr;
+                                break;
+
+                            case 6:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "EventID=13";
+                                ++countr;
+                                break;
+
+                            case 7:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "EventID=4624";
+                                ++countr;
+                                break;
+
+                            case 8:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "EventID=4634";
+                                ++countr;
+                                break;
+
+                            case 9:
+                                if (countr > 0) { subquery += " or "; --countr; }
+                                subquery += "EventID=4625";
+                                ++countr;
+                                break;
+
 
 
                             default:
@@ -185,36 +230,37 @@ namespace HacTrac
                     subquery += ")";
                     query += subquery;
                     ++count;
-                    MessageBox.Show(query);                }
-               
+                    MessageBox.Show(query);
 
+
+                }
+
+
+
+                query += "]]";
             }
-
-
-
-            query += "]]";
         }
 
         private void BtnApply_Click(object sender, EventArgs e)
         {
             CheckFilter();
 
-            if (filter==true) GenerateQuery(); else query = "*";
-            
+            if (filter == true) GenerateQuery(); else query = "*";
+
             log l = new log();
             mode m;
             DataSet ds = new DataSet();
             if (RadioSysmon.Checked) { a.logname = "Microsoft-Windows-Sysmon/Operational"; m = mode.sysmon; }
             else { a.logname = "Security"; m = mode.security; }
-           
-                ds = l.QueryRemoteComputer(query, a, m);
+            log.viewcount = (int)numericUpDown1.Value;
+            ds = l.QueryRemoteComputer(query, a, m);
             try
             {
                 dataGridView1.DataSource = ds; // dataset
                 dataGridView1.DataMember = "Events";
             }
             catch (Exception) { MessageBox.Show("No Events to show"); }
-                
+
 
         }
 
@@ -223,12 +269,12 @@ namespace HacTrac
             if (EventID.Checked)
             {
                 TxtEventID.Enabled = true;
-                
+
             }
             else
             {
                 TxtEventID.Enabled = false;
-                
+
             }
         }
 
@@ -254,6 +300,41 @@ namespace HacTrac
         {
             if (Levelbox.Checked) { LevelList.Enabled = true; }
             else LevelList.Enabled = false;
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            
+            string csv = string.Empty;
+
+            //Add the Header row for CSV file.
+            try
+            {
+                foreach (DataGridViewColumn column in dataGridView1.Columns)
+                {
+                    csv += column.HeaderText + ',';
+                }
+
+                //Add new line.
+                csv += "\r\n";
+
+                //Adding the Rows
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        //Add the Data rows.
+                        csv += cell.Value.ToString().Replace(",", ";") + ',';
+                    }
+
+                    //Add new line.
+                    csv += "\r\n";
+                }
+            }
+            catch (Exception) { MessageBox.Show("Nothing to export");  }
+            //Exporting to CSV.
+            if (saveFileDialog2.ShowDialog() == DialogResult.OK)
+            { File.WriteAllText(saveFileDialog2.FileName, csv); }
         }
     }
 }

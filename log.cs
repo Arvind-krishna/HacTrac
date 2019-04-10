@@ -10,9 +10,11 @@ using System.Threading.Tasks;
 namespace HacTrac
 {
     enum mode { security, sysmon };
+    
     class log
 
     {
+        public static int viewcount = 10;
 
         DataSet data = new DataSet();
         private void DisplayEventAndLogInformation(EventLogReader logreader, mode m)
@@ -33,6 +35,7 @@ namespace HacTrac
                 ds.Tables["Events"].Columns.Add("User");
                 ds.Tables["Events"].Columns.Add("Operation");
                 ds.Tables["Events"].Columns.Add("XML");
+                
 
 
                 int i = 0;
@@ -46,7 +49,7 @@ namespace HacTrac
                     ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName, eventInstance.ToXml());
 
                     ++i;
-                    if (i > 10) break;
+                    if (i > viewcount) break;
 
 
 
@@ -80,7 +83,7 @@ namespace HacTrac
                     ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.ProviderName,eventInstance.ToXml());
 
                     ++i;
-                    if (i > 10) break;
+                    if (i > viewcount) break;
 
 
                 }

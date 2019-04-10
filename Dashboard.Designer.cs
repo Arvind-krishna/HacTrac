@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnFetch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BtnXML = new System.Windows.Forms.Button();
@@ -43,13 +43,19 @@
             this.timebox = new System.Windows.Forms.ComboBox();
             this.LevelList = new System.Windows.Forms.CheckedListBox();
             this.Levelbox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.button1 = new System.Windows.Forms.Button();
+            this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnFetch
             // 
-            this.BtnFetch.Location = new System.Drawing.Point(62, 566);
+            this.BtnFetch.Location = new System.Drawing.Point(83, 578);
             this.BtnFetch.Name = "BtnFetch";
             this.BtnFetch.Size = new System.Drawing.Size(118, 42);
             this.BtnFetch.TabIndex = 0;
@@ -66,27 +72,27 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1443, 448);
+            this.dataGridView1.Size = new System.Drawing.Size(1127, 457);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
             // 
             // BtnXML
             // 
             this.BtnXML.Enabled = false;
-            this.BtnXML.Location = new System.Drawing.Point(52, 645);
+            this.BtnXML.Location = new System.Drawing.Point(71, 657);
             this.BtnXML.Name = "BtnXML";
             this.BtnXML.Size = new System.Drawing.Size(141, 33);
             this.BtnXML.TabIndex = 3;
@@ -97,14 +103,14 @@
             // TxtEventID
             // 
             this.TxtEventID.Enabled = false;
-            this.TxtEventID.Location = new System.Drawing.Point(437, 517);
+            this.TxtEventID.Location = new System.Drawing.Point(456, 529);
             this.TxtEventID.Name = "TxtEventID";
-            this.TxtEventID.Size = new System.Drawing.Size(101, 20);
+            this.TxtEventID.Size = new System.Drawing.Size(131, 20);
             this.TxtEventID.TabIndex = 4;
             // 
             // BtnApply
             // 
-            this.BtnApply.Location = new System.Drawing.Point(371, 645);
+            this.BtnApply.Location = new System.Drawing.Point(390, 657);
             this.BtnApply.Name = "BtnApply";
             this.BtnApply.Size = new System.Drawing.Size(141, 33);
             this.BtnApply.TabIndex = 10;
@@ -115,7 +121,7 @@
             // EventID
             // 
             this.EventID.AutoSize = true;
-            this.EventID.Location = new System.Drawing.Point(344, 517);
+            this.EventID.Location = new System.Drawing.Point(349, 529);
             this.EventID.Name = "EventID";
             this.EventID.Size = new System.Drawing.Size(83, 17);
             this.EventID.TabIndex = 11;
@@ -127,7 +133,7 @@
             // 
             this.groupBox1.Controls.Add(this.RadioSecurity);
             this.groupBox1.Controls.Add(this.RadioSysmon);
-            this.groupBox1.Location = new System.Drawing.Point(44, 486);
+            this.groupBox1.Location = new System.Drawing.Point(63, 498);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(161, 67);
             this.groupBox1.TabIndex = 12;
@@ -163,7 +169,7 @@
             // Keywords
             // 
             this.Keywords.AutoSize = true;
-            this.Keywords.Location = new System.Drawing.Point(344, 580);
+            this.Keywords.Location = new System.Drawing.Point(349, 592);
             this.Keywords.Name = "Keywords";
             this.Keywords.Size = new System.Drawing.Size(97, 17);
             this.Keywords.TabIndex = 14;
@@ -181,42 +187,107 @@
             "Last 24 Hours",
             "Last 7 Days",
             "Last 30 Days"});
-            this.timebox.Location = new System.Drawing.Point(447, 578);
+            this.timebox.Location = new System.Drawing.Point(456, 590);
             this.timebox.Name = "timebox";
-            this.timebox.Size = new System.Drawing.Size(121, 21);
+            this.timebox.Size = new System.Drawing.Size(131, 21);
             this.timebox.TabIndex = 15;
             // 
             // LevelList
             // 
+            this.LevelList.ColumnWidth = 200;
             this.LevelList.Enabled = false;
             this.LevelList.FormattingEnabled = true;
             this.LevelList.Items.AddRange(new object[] {
-            "Critical",
-            "Error",
-            "Warning",
-            "Information",
-            "Verbose"});
-            this.LevelList.Location = new System.Drawing.Point(641, 566);
+            "File Create/Drop",
+            "Process Create",
+            "Network Connection",
+            "Sysmon Status Change",
+            "Process Access",
+            "Registry (Creation and Deletion)",
+            "Registry (Modification)",
+            "Successful Logon",
+            "Successful Logoff",
+            "Failed Logon"});
+            this.LevelList.Location = new System.Drawing.Point(622, 558);
+            this.LevelList.MultiColumn = true;
             this.LevelList.Name = "LevelList";
-            this.LevelList.Size = new System.Drawing.Size(88, 94);
+            this.LevelList.Size = new System.Drawing.Size(417, 79);
             this.LevelList.TabIndex = 17;
             // 
             // Levelbox
             // 
             this.Levelbox.AutoSize = true;
-            this.Levelbox.Location = new System.Drawing.Point(641, 536);
+            this.Levelbox.Location = new System.Drawing.Point(622, 528);
             this.Levelbox.Name = "Levelbox";
-            this.Levelbox.Size = new System.Drawing.Size(67, 17);
+            this.Levelbox.Size = new System.Drawing.Size(69, 17);
             this.Levelbox.TabIndex = 18;
-            this.Levelbox.Text = "By Level";
+            this.Levelbox.Text = "By Event";
             this.Levelbox.UseVisualStyleBackColor = true;
             this.Levelbox.CheckedChanged += new System.EventHandler(this.Levelbox_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(619, 667);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Fetch";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(734, 667);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 21;
+            this.label2.Text = "records";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Increment = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Location = new System.Drawing.Point(659, 665);
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(69, 20);
+            this.numericUpDown1.TabIndex = 22;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(810, 657);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(229, 33);
+            this.button1.TabIndex = 23;
+            this.button1.Text = "Export CSV";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            // 
+            // saveFileDialog2
+            // 
+            this.saveFileDialog2.DefaultExt = "csv";
             // 
             // Dash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1467, 799);
+            this.ClientSize = new System.Drawing.Size(1151, 727);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.Levelbox);
             this.Controls.Add(this.LevelList);
             this.Controls.Add(this.timebox);
@@ -233,6 +304,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -254,6 +326,11 @@
         private System.Windows.Forms.ComboBox timebox;
         private System.Windows.Forms.CheckedListBox LevelList;
         private System.Windows.Forms.CheckBox Levelbox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog2;
     }
 }
 
