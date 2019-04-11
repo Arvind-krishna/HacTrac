@@ -49,7 +49,10 @@ namespace HacTrac
                 else MessageBox.Show("Remote Machine not reachable. Please check, and try again");
             }
 
-            catch (Exception) { MessageBox.Show("An error was encountered. Please try again"); }
+            catch (Exception) { MessageBox.Show("Invalid credentials. Please try again");
+                                        new HacTrac().Show();
+                    
+                    }
 
 
         }

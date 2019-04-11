@@ -79,6 +79,7 @@ namespace HacTrac
                     null != eventInstance; eventInstance = logreader.ReadEvent())
 
                 {
+                    
 
                     ds.Tables["Events"].Rows.Add(eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.Id, eventInstance.TaskDisplayName, eventInstance.ProviderName,eventInstance.ToXml());
 
@@ -94,6 +95,26 @@ namespace HacTrac
 
         }
 
+        public void ClearLog(string logname, Queryobj o, bool backup,string fname="")
+        {
+            EventLogSession session = new EventLogSession(
+               o.IP,                               
+               o.domain,                                  
+               o.username,                                
+               o.password,
+               SessionAuthentication.Default);
+            if(backup==true)
+            {
+                
+                session.ExportLog(logname, PathType.LogName, "*",fname);
+                
+            }
+
+            session.ClearLog(logname);
+            
+
+
+        }
         
 
 
@@ -104,9 +125,9 @@ namespace HacTrac
             
 
             EventLogSession session = new EventLogSession(
-                o.IP,                               // Remote Computer
-                o.domain,                                  // Domain
-                o.username,                                // Username
+                o.IP,                               
+                o.domain,                                  
+                o.username,                                
                 o.password,
                 SessionAuthentication.Default);
 

@@ -67,17 +67,19 @@ namespace HacTrac
 
 
                 string xml = dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString();
-               
+
 
                 StringReader theReader = new StringReader(xml);
-                if (saveFileDialog1.ShowDialog()==DialogResult.OK)
-                File.WriteAllText(saveFileDialog1.FileName, xml);
+                saveFileDialog1.DefaultExt = "xml";
+                saveFileDialog1.Filter = "XML files (*.xml)|*.xml";
+                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    File.WriteAllText(saveFileDialog1.FileName, xml);
                 MessageBox.Show("Success");
-                
+
             }
             catch (Exception) { }
         }
-       
+
 
 
 
@@ -237,7 +239,7 @@ namespace HacTrac
 
 
 
-                
+
             }
             query += "]]";
         }
@@ -305,7 +307,7 @@ namespace HacTrac
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            
+
             string csv = string.Empty;
 
             //Add the Header row for CSV file.
@@ -332,10 +334,29 @@ namespace HacTrac
                     csv += "\r\n";
                 }
             }
-            catch (Exception) { MessageBox.Show("Nothing to export");  }
+            catch (Exception) { MessageBox.Show("Nothing to export"); }
             //Exporting to CSV.
+            saveFileDialog2.DefaultExt = "csv";
+            saveFileDialog2.Filter = "CSV files (*.csv)|*.csv";
             if (saveFileDialog2.ShowDialog() == DialogResult.OK)
             { File.WriteAllText(saveFileDialog2.FileName, csv); }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string logname = "Security";
+            if (RadioSysmon.Checked) { logname = "Microsoft-Windows-Sysmon/Operational"; }
+
+            log l = new log();
+            if (MessageBox.Show("Are you sure you want to clear the " + logname + " log?", "Confirm Log Deletion",
+    MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+    MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            {
+               
+                    l.ClearLog(logname, a, false);
+                    MessageBox.Show("Log ClearSuccessful");
+                
+            }
         }
     }
 }
