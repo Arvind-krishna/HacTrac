@@ -49,6 +49,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.button2 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -57,7 +58,7 @@
             // BtnFetch
             // 
             this.BtnFetch.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnFetch.Location = new System.Drawing.Point(30, 594);
+            this.BtnFetch.Location = new System.Drawing.Point(64, 269);
             this.BtnFetch.Name = "BtnFetch";
             this.BtnFetch.Size = new System.Drawing.Size(161, 42);
             this.BtnFetch.TabIndex = 0;
@@ -88,7 +89,7 @@
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1127, 457);
+            this.dataGridView1.Size = new System.Drawing.Size(1127, 112);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
             // 
@@ -96,11 +97,11 @@
             // 
             this.BtnXML.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnXML.Enabled = false;
-            this.BtnXML.Location = new System.Drawing.Point(700, 475);
+            this.BtnXML.Location = new System.Drawing.Point(41, 141);
             this.BtnXML.Name = "BtnXML";
-            this.BtnXML.Size = new System.Drawing.Size(141, 33);
+            this.BtnXML.Size = new System.Drawing.Size(209, 33);
             this.BtnXML.TabIndex = 3;
-            this.BtnXML.Text = "Download XML";
+            this.BtnXML.Text = "Download Event XML";
             this.BtnXML.UseVisualStyleBackColor = true;
             this.BtnXML.Click += new System.EventHandler(this.BtnXML_Click);
             // 
@@ -108,7 +109,7 @@
             // 
             this.TxtEventID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.TxtEventID.Enabled = false;
-            this.TxtEventID.Location = new System.Drawing.Point(423, 545);
+            this.TxtEventID.Location = new System.Drawing.Point(423, 200);
             this.TxtEventID.Name = "TxtEventID";
             this.TxtEventID.Size = new System.Drawing.Size(131, 20);
             this.TxtEventID.TabIndex = 4;
@@ -116,7 +117,7 @@
             // BtnApply
             // 
             this.BtnApply.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnApply.Location = new System.Drawing.Point(357, 673);
+            this.BtnApply.Location = new System.Drawing.Point(357, 328);
             this.BtnApply.Name = "BtnApply";
             this.BtnApply.Size = new System.Drawing.Size(141, 33);
             this.BtnApply.TabIndex = 10;
@@ -128,7 +129,7 @@
             // 
             this.EventID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.EventID.AutoSize = true;
-            this.EventID.Location = new System.Drawing.Point(316, 545);
+            this.EventID.Location = new System.Drawing.Point(316, 200);
             this.EventID.Name = "EventID";
             this.EventID.Size = new System.Drawing.Size(83, 17);
             this.EventID.TabIndex = 11;
@@ -141,7 +142,7 @@
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox1.Controls.Add(this.RadioSecurity);
             this.groupBox1.Controls.Add(this.RadioSysmon);
-            this.groupBox1.Location = new System.Drawing.Point(30, 514);
+            this.groupBox1.Location = new System.Drawing.Point(64, 189);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(161, 67);
             this.groupBox1.TabIndex = 12;
@@ -152,7 +153,7 @@
             // 
             this.RadioSecurity.AutoSize = true;
             this.RadioSecurity.Checked = true;
-            this.RadioSecurity.Location = new System.Drawing.Point(86, 31);
+            this.RadioSecurity.Location = new System.Drawing.Point(86, 32);
             this.RadioSecurity.Name = "RadioSecurity";
             this.RadioSecurity.Size = new System.Drawing.Size(63, 17);
             this.RadioSecurity.TabIndex = 1;
@@ -163,7 +164,7 @@
             // RadioSysmon
             // 
             this.RadioSysmon.AutoSize = true;
-            this.RadioSysmon.Location = new System.Drawing.Point(18, 31);
+            this.RadioSysmon.Location = new System.Drawing.Point(18, 32);
             this.RadioSysmon.Name = "RadioSysmon";
             this.RadioSysmon.Size = new System.Drawing.Size(62, 17);
             this.RadioSysmon.TabIndex = 0;
@@ -179,7 +180,7 @@
             // 
             this.Keywords.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Keywords.AutoSize = true;
-            this.Keywords.Location = new System.Drawing.Point(316, 608);
+            this.Keywords.Location = new System.Drawing.Point(316, 263);
             this.Keywords.Name = "Keywords";
             this.Keywords.Size = new System.Drawing.Size(97, 17);
             this.Keywords.TabIndex = 14;
@@ -198,7 +199,7 @@
             "Last 24 Hours",
             "Last 7 Days",
             "Last 30 Days"});
-            this.timebox.Location = new System.Drawing.Point(423, 606);
+            this.timebox.Location = new System.Drawing.Point(423, 261);
             this.timebox.Name = "timebox";
             this.timebox.Size = new System.Drawing.Size(131, 21);
             this.timebox.TabIndex = 15;
@@ -220,7 +221,7 @@
             "Successful Logon",
             "Successful Logoff",
             "Failed Logon"});
-            this.LevelList.Location = new System.Drawing.Point(589, 574);
+            this.LevelList.Location = new System.Drawing.Point(589, 229);
             this.LevelList.MultiColumn = true;
             this.LevelList.Name = "LevelList";
             this.LevelList.Size = new System.Drawing.Size(417, 79);
@@ -230,7 +231,7 @@
             // 
             this.Levelbox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Levelbox.AutoSize = true;
-            this.Levelbox.Location = new System.Drawing.Point(589, 544);
+            this.Levelbox.Location = new System.Drawing.Point(589, 199);
             this.Levelbox.Name = "Levelbox";
             this.Levelbox.Size = new System.Drawing.Size(69, 17);
             this.Levelbox.TabIndex = 18;
@@ -242,7 +243,7 @@
             // 
             this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(586, 683);
+            this.label1.Location = new System.Drawing.Point(586, 338);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 13);
             this.label1.TabIndex = 20;
@@ -252,7 +253,7 @@
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(701, 683);
+            this.label2.Location = new System.Drawing.Point(701, 338);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(42, 13);
             this.label2.TabIndex = 21;
@@ -266,7 +267,7 @@
             0,
             0,
             0});
-            this.numericUpDown1.Location = new System.Drawing.Point(626, 681);
+            this.numericUpDown1.Location = new System.Drawing.Point(626, 336);
             this.numericUpDown1.Minimum = new decimal(new int[] {
             10,
             0,
@@ -284,7 +285,7 @@
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button1.Location = new System.Drawing.Point(910, 486);
+            this.button1.Location = new System.Drawing.Point(910, 141);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(229, 33);
             this.button1.TabIndex = 23;
@@ -299,7 +300,7 @@
             // button2
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button2.Location = new System.Drawing.Point(30, 654);
+            this.button2.Location = new System.Drawing.Point(64, 329);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(161, 42);
             this.button2.TabIndex = 24;
@@ -307,11 +308,22 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1043, 263);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(96, 26);
+            this.label5.TabIndex = 25;
+            this.label5.Text = "HacTrac ";
+            // 
             // Dash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1151, 727);
+            this.ClientSize = new System.Drawing.Size(1151, 382);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numericUpDown1);
@@ -361,6 +373,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog2;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label5;
     }
 }
 

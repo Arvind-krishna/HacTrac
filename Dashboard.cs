@@ -73,8 +73,10 @@ namespace HacTrac
                 saveFileDialog1.DefaultExt = "xml";
                 saveFileDialog1.Filter = "XML files (*.xml)|*.xml";
                 if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                {
                     File.WriteAllText(saveFileDialog1.FileName, xml);
-                MessageBox.Show("Success");
+                    MessageBox.Show("Success");
+                }
 
             }
             catch (Exception) { }
@@ -134,11 +136,11 @@ namespace HacTrac
 
                 }
                 string subquery = String.Format("TimeCreated[timediff(@SystemTime) <= {0}]", t);
-                MessageBox.Show(subquery);
+                
 
 
                 query += subquery;
-                MessageBox.Show(query);
+                
                 ++count;
             }
 
@@ -232,7 +234,7 @@ namespace HacTrac
                     subquery += ")";
                     query += subquery;
                     ++count;
-                    MessageBox.Show(query);
+                   
 
 
                 }
