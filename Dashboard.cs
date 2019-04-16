@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace HacTrac
 {
@@ -23,24 +24,41 @@ namespace HacTrac
         {
             InitializeComponent();
             a = o;
+            DataColumnCollection columns = Alerts.alerts.Columns;
+            columns.Add("EventID");
+            columns.Add("Level");
+            columns.Add("Time");
+
+            columns.Add("Task");
+            columns.Add("User");
+            columns.Add("Operation");
+            columns.Add("XML");
+            columns.Add("Threat-Type");
+
+
+            button1_Click(null, null);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             log l = new log();
-            query = "*";
+            if (sender == null && e == null) { query = "*[System[(EventID=11)]]"; RadioSysmon.Checked = true; }
+            else { query = "*"; log.viewcount = (int)numericUpDown1.Value; }
             DataSet ds = new DataSet();
             mode m;
-            if (RadioSysmon.Checked) { a.logname = "Microsoft-Windows-Sysmon/Operational"; m = mode.sysmon; }
-            else { a.logname = "Security"; m = mode.security; }
-            log.viewcount = (int)numericUpDown1.Value;
+            if (RadioSecurity.Checked) { a.logname = "Security"; m = mode.sysmon; }
+            else { a.logname = "Microsoft-Windows-Sysmon/Operational"; m = mode.sysmon; }
+            
             ds = l.QueryRemoteComputer(query, a, m);
             try
             {
-                dataGridView1.DataSource = ds; // dataset
-                dataGridView1.DataMember = "Events";
+                DataTable dt = ds.Tables["Events"];
+                dataGridView1.DataSource = dt;
+                l.FilterLog(dataGridView1);
+                dataGridView1.Columns["XML"].Visible = false;
+
             }
-            catch (Exception) { MessageBox.Show("Bad Query/Nothing to show"); }
+            catch (Exception exx) { MessageBox.Show(exx.Message); }
 
         }
 
@@ -66,17 +84,12 @@ namespace HacTrac
 
 
 
-                string xml = dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString();
+                string str = dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString();
+                new EveInfo(str).Show();
+                
 
 
-                StringReader theReader = new StringReader(xml);
-                saveFileDialog1.DefaultExt = "xml";
-                saveFileDialog1.Filter = "XML files (*.xml)|*.xml";
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    File.WriteAllText(saveFileDialog1.FileName, xml);
-                    MessageBox.Show("Success");
-                }
+               
 
             }
             catch (Exception) { }
@@ -84,7 +97,7 @@ namespace HacTrac
 
 
 
-
+        
 
 
 
@@ -261,10 +274,14 @@ namespace HacTrac
             ds = l.QueryRemoteComputer(query, a, m);
             try
             {
-                dataGridView1.DataSource = ds; // dataset
+                
+                dataGridView1.DataSource = ds;
                 dataGridView1.DataMember = "Events";
+                l.FilterLog(dataGridView1);
+                dataGridView1.Columns["XML"].Visible = false;
+
             }
-            catch (Exception) { MessageBox.Show("No Events to show"); }
+            catch (Exception exc) { MessageBox.Show(exc.Message); }
 
 
         }
@@ -359,6 +376,11 @@ namespace HacTrac
                     MessageBox.Show("Log ClearSuccessful");
                 
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            new Alerts().Show();
         }
     }
 }

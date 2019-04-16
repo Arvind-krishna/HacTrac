@@ -43,7 +43,9 @@ namespace HacTrac
 
                 {
                     this.Hide();
-                    new Dash(a).Show();
+                    try { new Dash(a).Show(); }
+                    catch (Exception bee) { MessageBox.Show(bee.Message); }
+
                 }
 
                 else MessageBox.Show("Remote Machine not reachable. Please check, and try again");
@@ -57,9 +59,6 @@ namespace HacTrac
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            new Dash(null).Show();
-        }
+       
     }
 }

@@ -167,9 +167,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(126, 48);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(254, 26);
+            this.label5.Size = new System.Drawing.Size(270, 26);
             this.label5.TabIndex = 13;
-            this.label5.Text = "HacTrac : Remote Logger";
+            this.label5.Text = "HacTrac : Remote Log Tool";
             // 
             // HacTrac
             // 

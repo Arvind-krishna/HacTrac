@@ -84,6 +84,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alerts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alerts.Designer.cs">
+      <DependentUpon>Alerts.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EveInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EveInfo.Designer.cs">
+      <DependentUpon>EveInfo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Queryobj.cs" />
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -101,8 +113,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleReadWriteXML1.cs" />
+    <EmbeddedResource Include="Alerts.resx">
+      <DependentUpon>Alerts.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Dashboard.resx">
       <DependentUpon>Dashboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EveInfo.resx">
+      <DependentUpon>EveInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HacTrac.resx">
       <DependentUpon>HacTrac.cs</DependentUpon>
