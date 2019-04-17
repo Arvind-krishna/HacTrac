@@ -52,6 +52,7 @@
             this.IPbox.Name = "IPbox";
             this.IPbox.Size = new System.Drawing.Size(166, 20);
             this.IPbox.TabIndex = 0;
+            this.IPbox.Text = "192.168.56.106";
             // 
             // contextMenuStrip1
             // 
@@ -65,6 +66,7 @@
             this.DomBox.Name = "DomBox";
             this.DomBox.Size = new System.Drawing.Size(166, 20);
             this.DomBox.TabIndex = 2;
+            this.DomBox.Text = "krish.com";
             // 
             // label1
             // 
@@ -91,7 +93,6 @@
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(98, 17);
             this.radioButton1.TabIndex = 5;
-            this.radioButton1.TabStop = true;
             this.radioButton1.Text = "WORKGROUP";
             this.radioButton1.UseVisualStyleBackColor = true;
             this.radioButton1.CheckedChanged += new System.EventHandler(this.radioButton1_CheckedChanged);
@@ -99,6 +100,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
+            this.radioButton2.Checked = true;
             this.radioButton2.Location = new System.Drawing.Point(116, 19);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(68, 17);
@@ -124,6 +126,7 @@
             this.UnameBox.Name = "UnameBox";
             this.UnameBox.Size = new System.Drawing.Size(164, 20);
             this.UnameBox.TabIndex = 8;
+            this.UnameBox.Text = "Administrator";
             // 
             // PassBox
             // 
@@ -132,6 +135,7 @@
             this.PassBox.PasswordChar = '✸';
             this.PassBox.Size = new System.Drawing.Size(164, 20);
             this.PassBox.TabIndex = 10;
+            this.PassBox.Text = "@mmba13!";
             // 
             // label3
             // 

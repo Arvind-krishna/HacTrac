@@ -24,17 +24,60 @@ namespace HacTrac
 
         private void Alerts_Load(object sender, EventArgs e)
         {
-            DataTable distinctTable = alerts.DefaultView.ToTable(true);
-            dataGridView1.DataSource = distinctTable;
+            alerts = alerts.DefaultView.ToTable(true);
+            dataGridView1.DataSource = alerts;
             foreach (DataGridViewRow drow in dataGridView1.Rows)
             {
-                if (drow.Cells["EventID"].Value.ToString() == "11")
-                { drow.DefaultCellStyle.BackColor = Color.OrangeRed;
-                    drow.Cells["Threat-Type"].Value = "Payload Drop Detected";
+                int EvID = Int32.Parse(drow.Cells["EventID"].Value.ToString());
+
+                switch (EvID)
+                {
+                    case 11:
+                        drow.DefaultCellStyle.BackColor = Color.OrangeRed;
+                        drow.Cells["Threat-Type"].Value = "Payload Drop Detected";
+                        break;
+
+                    case 4624:
+                        drow.DefaultCellStyle.BackColor = Color.Gray;
+                        drow.Cells["Threat-Type"].Value = "RDP Login";
+                        break;
+
+                    case 4634:
+                        drow.DefaultCellStyle.BackColor = Color.Gray;
+                        drow.Cells["Threat-Type"].Value = "RDP Logout";
+                        break;
+
+                    case 4663:
+                        drow.DefaultCellStyle.BackColor = Color.Orange;
+                        if (drow.Cells["XML"].Value.ToString().Contains("notepad.exe"))
+                        {
+                            if (drow.Cells["XML"].Value.ToString().Contains("0x6</Data>")) drow.Cells["Threat-Type"].Value = "Deception Document Modified";
+                            else drow.Cells["Threat-Type"].Value = "Deception Document Opened"; }
+                        else if (drow.Cells["XML"].Value.ToString().Contains("<Data Name='AccessMask'>0x10000</Data>"))
+                        { drow.Cells["Threat-Type"].Value = "Deception Document Deleted"; }
+                        else drow.Cells["Threat-Type"].Value = "Deception Document Accessed";
+                        break;
+
+                    case 4656:
+                        drow.DefaultCellStyle.BackColor = Color.Orange;
+                        drow.Cells["Threat-Type"].Value = "Deception Document Accessed";
+                        break;
+
+                    case 4690:
+                        drow.DefaultCellStyle.BackColor = Color.Orange;
+                        drow.Cells["Threat-Type"].Value = "Deception Document Copied/Pasted";
+                        break;
+
+                    default: break;
+                  
+
                 }
             }
             dataGridView1.Columns["XML"].Visible = false;
+
         }
+            
+        
 
         private void BtnXML_Click(object sender, EventArgs e)
         {

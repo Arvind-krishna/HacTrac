@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnFetch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BtnXML = new System.Windows.Forms.Button();
@@ -51,6 +51,9 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
@@ -59,11 +62,11 @@
             // BtnFetch
             // 
             this.BtnFetch.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnFetch.Location = new System.Drawing.Point(95, 413);
+            this.BtnFetch.Location = new System.Drawing.Point(63, 446);
             this.BtnFetch.Name = "BtnFetch";
-            this.BtnFetch.Size = new System.Drawing.Size(161, 42);
+            this.BtnFetch.Size = new System.Drawing.Size(161, 27);
             this.BtnFetch.TabIndex = 0;
-            this.BtnFetch.Text = "Fetch Logs";
+            this.BtnFetch.Text = "Fetch Log";
             this.BtnFetch.UseVisualStyleBackColor = true;
             this.BtnFetch.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -77,14 +80,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
@@ -98,7 +101,7 @@
             // 
             this.BtnXML.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnXML.Enabled = false;
-            this.BtnXML.Location = new System.Drawing.Point(72, 285);
+            this.BtnXML.Location = new System.Drawing.Point(454, 285);
             this.BtnXML.Name = "BtnXML";
             this.BtnXML.Size = new System.Drawing.Size(209, 33);
             this.BtnXML.TabIndex = 3;
@@ -143,7 +146,7 @@
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.groupBox1.Controls.Add(this.RadioSecurity);
             this.groupBox1.Controls.Add(this.RadioSysmon);
-            this.groupBox1.Location = new System.Drawing.Point(95, 333);
+            this.groupBox1.Location = new System.Drawing.Point(63, 373);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(161, 67);
             this.groupBox1.TabIndex = 12;
@@ -301,11 +304,11 @@
             // button2
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button2.Location = new System.Drawing.Point(95, 473);
+            this.button2.Location = new System.Drawing.Point(63, 479);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(161, 42);
+            this.button2.Size = new System.Drawing.Size(161, 26);
             this.button2.TabIndex = 24;
-            this.button2.Text = "Clear Logs";
+            this.button2.Text = "Clear Log";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -331,11 +334,47 @@
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
+            // button4
+            // 
+            this.button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button4.Location = new System.Drawing.Point(63, 285);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(161, 33);
+            this.button4.TabIndex = 27;
+            this.button4.Text = "Fetch All Logs";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // label3
+            // 
+            this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(68, 346);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(156, 15);
+            this.label3.TabIndex = 28;
+            this.label3.Text = "Log specific operations";
+            // 
+            // button5
+            // 
+            this.button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button5.Location = new System.Drawing.Point(688, 285);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(209, 33);
+            this.button5.TabIndex = 29;
+            this.button5.Text = "temp";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // Dash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1213, 526);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
@@ -389,6 +428,9 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button5;
     }
 }
 

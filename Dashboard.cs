@@ -42,14 +42,15 @@ namespace HacTrac
         private void button1_Click(object sender, EventArgs e)
         {
             log l = new log();
-            if (sender == null && e == null) { query = "*[System[(EventID=11)]]"; RadioSysmon.Checked = true; }
-            else { query = "*"; log.viewcount = (int)numericUpDown1.Value; }
             DataSet ds = new DataSet();
-            mode m;
-            if (RadioSecurity.Checked) { a.logname = "Security"; m = mode.sysmon; }
-            else { a.logname = "Microsoft-Windows-Sysmon/Operational"; m = mode.sysmon; }
+            if (sender == null && e == null) { ds=l.fullquery(a); }
             
-            ds = l.QueryRemoteComputer(query, a, m);
+            
+            mode m;
+            if (RadioSecurity.Checked) { a.logname = "Security"; m = mode.security; ds = l.QueryRemoteComputer("*[System[(EventID = 4656) or(EventID = 4663) or(EventID = 4690) or (EventID = 4634) or (EventID = 4624)]]", a, m); }
+            else { a.logname = "Microsoft-Windows-Sysmon/Operational"; m = mode.sysmon; ds = l.QueryRemoteComputer("*[System[(EventID=11) or (EventID=1) or (EventID=3)]]", a, m); }
+            
+            
             try
             {
                 DataTable dt = ds.Tables["Events"];
@@ -381,6 +382,30 @@ namespace HacTrac
         private void button3_Click(object sender, EventArgs e)
         {
             new Alerts().Show();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            log l = new log();
+            DataSet ds = new DataSet();
+            ds = l.fullquery(a); 
+
+
+            try
+            {
+                DataTable dt = ds.Tables["Events"];
+                dataGridView1.DataSource = dt;
+                l.FilterLog(dataGridView1);
+                dataGridView1.Columns["XML"].Visible = false;
+
+            }
+            catch (Exception exx) { MessageBox.Show(exx.Message); }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show(dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString());
+            MessageBox.Show("C:\\Users\\akrish\\");
         }
     }
 }

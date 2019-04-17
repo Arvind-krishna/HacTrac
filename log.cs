@@ -19,7 +19,7 @@ namespace HacTrac
         public static int viewcount = 50;
 
         DataSet data = new DataSet();
-        private void DisplayEventAndLogInformation(EventLogReader logreader, mode m)
+        private void DisplayEventAndLogInformation(EventLogReader logreader)
 
         {
             DataSet ds = new DataSet();
@@ -54,14 +54,16 @@ namespace HacTrac
             }
 
 
-
-            data = ds;
+            
+                data = ds;
+        
                
 
               
 
         }
 
+      
 
         public void FilterLog(DataGridView ds)
         {
@@ -72,17 +74,50 @@ namespace HacTrac
                 //MessageBox.Show(xmlst);
                 try
                 {
-                    if ((xmlst.Contains("explorer.exe") || (xmlst.Contains("VBoxTray.exe")) && xmlst.Contains("<EventID>11</EventID>"))
+                    if ((xmlst.Contains("explorer.exe") || xmlst.Contains("VBoxTray.exe")) && xmlst.Contains("<EventID>11</EventID>") && (xmlst.Contains("C:\\Users\\test\\AppData\\Local\\Temp\\1\\VirtualBox Dropped Files") || xmlst.Contains("C:\\Users\\test\\Desktop") || xmlst.Contains("C:\\Users\\Administrator\\Desktop")))
                     {
 
                         DataRow drow = ((DataRowView)row.DataBoundItem).Row;
 
 
                         Alerts.alerts.ImportRow(drow);
-                        // Alerts.alerts.Rows[Alerts.alerts.Rows.Count - 1].DefaultCellStyle.BackColor = Color.OrangeRed;
+                        //Alerts.alerts.Rows[Alerts.alerts.Rows.Count - 1].DefaultCellStyle.BackColor = Color.OrangeRed;
                     }
 
+                    else if (xmlst.Contains("<Data Name='LogonType'>3</Data>"))
+                    {
+                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
 
+
+                        Alerts.alerts.ImportRow(drow);
+                    }
+
+                    else if (xmlst.Contains("<EventID>4656</EventID>") && xmlst.Contains("C:\\Confidential\\"))
+                        {
+
+                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
+
+
+                        Alerts.alerts.ImportRow(drow);
+                    }
+
+                    else if (xmlst.Contains("<EventID>4663</EventID>") && xmlst.Contains("C:\\Confidential\\"))
+                        {
+
+                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
+
+
+                        Alerts.alerts.ImportRow(drow);
+                       }
+
+                    else if (xmlst.Contains("<EventID>4690</EventID>"))
+                    {
+
+                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
+
+
+                        Alerts.alerts.ImportRow(drow);
+                    }
 
 
 
@@ -114,8 +149,21 @@ namespace HacTrac
 
 
         }
-        
 
+        public DataSet fullquery(Queryobj o)
+
+        {
+            DataSet ds1 = new DataSet();
+            DataSet ds2 = new DataSet();
+            log l = new log();
+            o.logname = "Microsoft-Windows-Sysmon/Operational";
+            ds1 = l.QueryRemoteComputer("*[System[(EventID=11) or (EventID=1) or (EventID=3)]]", o,mode.sysmon);
+            o.logname = "Security";
+            ds2 = l.QueryRemoteComputer("*[System[(EventID=4656) or (EventID=4663) or (EventID=4690) or (EventID=4634) or (EventID=4624)]]", o,mode.security);
+            ds1.Merge(ds2);
+            return ds1;
+
+        }
 
         internal DataSet QueryRemoteComputer(string querystring, Queryobj o, mode a)
         {
@@ -141,7 +189,7 @@ namespace HacTrac
                 EventLogReader logReader = new EventLogReader(query);
 
                 // Display event info
-                DisplayEventAndLogInformation(logReader, a);
+                DisplayEventAndLogInformation(logReader);
 
             }
             catch (EventLogException e)
