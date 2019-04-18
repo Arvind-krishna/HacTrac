@@ -32,6 +32,7 @@ namespace HacTrac
                 textBox1.Text += "\r\n";
 
             }
+            if (textBox1.Text == "") { textBox1.Text = xml.ToString(); }
         }
 
         private void button1_Click(object sender, EventArgs e)

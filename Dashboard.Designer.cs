@@ -28,7 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.BtnFetch = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.BtnXML = new System.Windows.Forms.Button();
@@ -43,9 +45,6 @@
             this.timebox = new System.Windows.Forms.ComboBox();
             this.LevelList = new System.Windows.Forms.CheckedListBox();
             this.Levelbox = new System.Windows.Forms.CheckBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.saveFileDialog2 = new System.Windows.Forms.SaveFileDialog();
             this.button2 = new System.Windows.Forms.Button();
@@ -54,17 +53,18 @@
             this.button4 = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.button5 = new System.Windows.Forms.Button();
+            this.RDP = new System.Windows.Forms.RadioButton();
+            this.button6 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // BtnFetch
             // 
             this.BtnFetch.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnFetch.Location = new System.Drawing.Point(63, 446);
+            this.BtnFetch.Location = new System.Drawing.Point(104, 589);
             this.BtnFetch.Name = "BtnFetch";
-            this.BtnFetch.Size = new System.Drawing.Size(161, 27);
+            this.BtnFetch.Size = new System.Drawing.Size(143, 27);
             this.BtnFetch.TabIndex = 0;
             this.BtnFetch.Text = "Fetch Log";
             this.BtnFetch.UseVisualStyleBackColor = true;
@@ -79,21 +79,37 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridView1.Location = new System.Drawing.Point(12, 12);
             this.dataGridView1.MultiSelect = false;
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
+            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1189, 256);
+            this.dataGridView1.Size = new System.Drawing.Size(1266, 380);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_RowEnter);
             // 
@@ -101,7 +117,7 @@
             // 
             this.BtnXML.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.BtnXML.Enabled = false;
-            this.BtnXML.Location = new System.Drawing.Point(454, 285);
+            this.BtnXML.Location = new System.Drawing.Point(507, 416);
             this.BtnXML.Name = "BtnXML";
             this.BtnXML.Size = new System.Drawing.Size(209, 33);
             this.BtnXML.TabIndex = 3;
@@ -113,7 +129,7 @@
             // 
             this.TxtEventID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.TxtEventID.Enabled = false;
-            this.TxtEventID.Location = new System.Drawing.Point(454, 344);
+            this.TxtEventID.Location = new System.Drawing.Point(617, 477);
             this.TxtEventID.Name = "TxtEventID";
             this.TxtEventID.Size = new System.Drawing.Size(131, 20);
             this.TxtEventID.TabIndex = 4;
@@ -121,9 +137,9 @@
             // BtnApply
             // 
             this.BtnApply.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.BtnApply.Location = new System.Drawing.Point(388, 472);
+            this.BtnApply.Location = new System.Drawing.Point(558, 587);
             this.BtnApply.Name = "BtnApply";
-            this.BtnApply.Size = new System.Drawing.Size(141, 33);
+            this.BtnApply.Size = new System.Drawing.Size(141, 35);
             this.BtnApply.TabIndex = 10;
             this.BtnApply.Text = "Apply Filters";
             this.BtnApply.UseVisualStyleBackColor = true;
@@ -133,7 +149,7 @@
             // 
             this.EventID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.EventID.AutoSize = true;
-            this.EventID.Location = new System.Drawing.Point(347, 344);
+            this.EventID.Location = new System.Drawing.Point(510, 477);
             this.EventID.Name = "EventID";
             this.EventID.Size = new System.Drawing.Size(83, 17);
             this.EventID.TabIndex = 11;
@@ -144,11 +160,12 @@
             // groupBox1
             // 
             this.groupBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.groupBox1.Controls.Add(this.RDP);
             this.groupBox1.Controls.Add(this.RadioSecurity);
             this.groupBox1.Controls.Add(this.RadioSysmon);
-            this.groupBox1.Location = new System.Drawing.Point(63, 373);
+            this.groupBox1.Location = new System.Drawing.Point(111, 516);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(161, 67);
+            this.groupBox1.Size = new System.Drawing.Size(282, 67);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Select Log source";
@@ -161,7 +178,6 @@
             this.RadioSecurity.Name = "RadioSecurity";
             this.RadioSecurity.Size = new System.Drawing.Size(63, 17);
             this.RadioSecurity.TabIndex = 1;
-            this.RadioSecurity.TabStop = true;
             this.RadioSecurity.Text = "Security";
             this.RadioSecurity.UseVisualStyleBackColor = true;
             // 
@@ -172,7 +188,6 @@
             this.RadioSysmon.Name = "RadioSysmon";
             this.RadioSysmon.Size = new System.Drawing.Size(62, 17);
             this.RadioSysmon.TabIndex = 0;
-            this.RadioSysmon.TabStop = true;
             this.RadioSysmon.Text = "Sysmon";
             this.RadioSysmon.UseVisualStyleBackColor = true;
             // 
@@ -184,7 +199,7 @@
             // 
             this.Keywords.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Keywords.AutoSize = true;
-            this.Keywords.Location = new System.Drawing.Point(347, 407);
+            this.Keywords.Location = new System.Drawing.Point(510, 540);
             this.Keywords.Name = "Keywords";
             this.Keywords.Size = new System.Drawing.Size(97, 17);
             this.Keywords.TabIndex = 14;
@@ -203,7 +218,7 @@
             "Last 24 Hours",
             "Last 7 Days",
             "Last 30 Days"});
-            this.timebox.Location = new System.Drawing.Point(454, 405);
+            this.timebox.Location = new System.Drawing.Point(617, 538);
             this.timebox.Name = "timebox";
             this.timebox.Size = new System.Drawing.Size(131, 21);
             this.timebox.TabIndex = 15;
@@ -216,26 +231,24 @@
             this.LevelList.FormattingEnabled = true;
             this.LevelList.Items.AddRange(new object[] {
             "File Create/Drop",
-            "Process Create",
-            "Network Connection",
-            "Sysmon Status Change",
-            "Process Access",
-            "Registry (Creation and Deletion)",
-            "Registry (Modification)",
-            "Successful Logon",
-            "Successful Logoff",
-            "Failed Logon"});
-            this.LevelList.Location = new System.Drawing.Point(620, 373);
+            "RDP Logon",
+            "RDP Logoff",
+            "RDP Disconnect",
+            "RDP Re-connect",
+            "File Access",
+            "File Copy/Paste",
+            "File Modify/Delete"});
+            this.LevelList.Location = new System.Drawing.Point(783, 499);
             this.LevelList.MultiColumn = true;
             this.LevelList.Name = "LevelList";
-            this.LevelList.Size = new System.Drawing.Size(417, 79);
+            this.LevelList.Size = new System.Drawing.Size(145, 124);
             this.LevelList.TabIndex = 17;
             // 
             // Levelbox
             // 
             this.Levelbox.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.Levelbox.AutoSize = true;
-            this.Levelbox.Location = new System.Drawing.Point(620, 343);
+            this.Levelbox.Location = new System.Drawing.Point(783, 476);
             this.Levelbox.Name = "Levelbox";
             this.Levelbox.Size = new System.Drawing.Size(69, 17);
             this.Levelbox.TabIndex = 18;
@@ -243,53 +256,10 @@
             this.Levelbox.UseVisualStyleBackColor = true;
             this.Levelbox.CheckedChanged += new System.EventHandler(this.Levelbox_CheckedChanged);
             // 
-            // label1
-            // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(617, 482);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(34, 13);
-            this.label1.TabIndex = 20;
-            this.label1.Text = "Fetch";
-            // 
-            // label2
-            // 
-            this.label2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(732, 482);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 21;
-            this.label2.Text = "records";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.numericUpDown1.Increment = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Location = new System.Drawing.Point(657, 480);
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(69, 20);
-            this.numericUpDown1.TabIndex = 22;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            // 
             // button1
             // 
             this.button1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button1.Location = new System.Drawing.Point(941, 285);
+            this.button1.Location = new System.Drawing.Point(994, 416);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(229, 33);
             this.button1.TabIndex = 23;
@@ -304,9 +274,9 @@
             // button2
             // 
             this.button2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button2.Location = new System.Drawing.Point(63, 479);
+            this.button2.Location = new System.Drawing.Point(253, 590);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(161, 26);
+            this.button2.Size = new System.Drawing.Size(140, 26);
             this.button2.TabIndex = 24;
             this.button2.Text = "Clear Log";
             this.button2.UseVisualStyleBackColor = true;
@@ -316,19 +286,19 @@
             // 
             this.label5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(1074, 407);
+            this.label5.Font = new System.Drawing.Font("Microsoft YaHei", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1034, 575);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(96, 26);
+            this.label5.Size = new System.Drawing.Size(158, 42);
             this.label5.TabIndex = 25;
             this.label5.Text = "HacTrac ";
             // 
             // button3
             // 
             this.button3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button3.Location = new System.Drawing.Point(1060, 451);
+            this.button3.Location = new System.Drawing.Point(994, 499);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(141, 33);
+            this.button3.Size = new System.Drawing.Size(229, 63);
             this.button3.TabIndex = 26;
             this.button3.Text = "View Alerts";
             this.button3.UseVisualStyleBackColor = true;
@@ -337,7 +307,7 @@
             // button4
             // 
             this.button4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button4.Location = new System.Drawing.Point(63, 285);
+            this.button4.Location = new System.Drawing.Point(86, 416);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(161, 33);
             this.button4.TabIndex = 27;
@@ -350,7 +320,7 @@
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(68, 346);
+            this.label3.Location = new System.Drawing.Point(160, 489);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(156, 15);
             this.label3.TabIndex = 28;
@@ -359,19 +329,41 @@
             // button5
             // 
             this.button5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button5.Location = new System.Drawing.Point(688, 285);
+            this.button5.Location = new System.Drawing.Point(741, 416);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(209, 33);
             this.button5.TabIndex = 29;
-            this.button5.Text = "temp";
+            this.button5.Text = "View Event XML";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // RDP
+            // 
+            this.RDP.AutoSize = true;
+            this.RDP.Location = new System.Drawing.Point(155, 32);
+            this.RDP.Name = "RDP";
+            this.RDP.Size = new System.Drawing.Size(109, 17);
+            this.RDP.TabIndex = 30;
+            this.RDP.Text = "Terminal Services";
+            this.RDP.UseVisualStyleBackColor = true;
+            // 
+            // button6
+            // 
+            this.button6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.button6.Location = new System.Drawing.Point(253, 416);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(161, 33);
+            this.button6.TabIndex = 30;
+            this.button6.Text = "Clear All Logs";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // Dash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1213, 526);
+            this.ClientSize = new System.Drawing.Size(1290, 650);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button4);
@@ -379,9 +371,6 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.Levelbox);
             this.Controls.Add(this.LevelList);
             this.Controls.Add(this.timebox);
@@ -398,7 +387,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -420,9 +408,6 @@
         private System.Windows.Forms.ComboBox timebox;
         private System.Windows.Forms.CheckedListBox LevelList;
         private System.Windows.Forms.CheckBox Levelbox;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.SaveFileDialog saveFileDialog2;
         private System.Windows.Forms.Button button2;
@@ -431,6 +416,8 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.RadioButton RDP;
+        private System.Windows.Forms.Button button6;
     }
 }
 

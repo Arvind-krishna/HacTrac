@@ -26,6 +26,9 @@ namespace HacTrac
         {
             alerts = alerts.DefaultView.ToTable(true);
             dataGridView1.DataSource = alerts;
+            dataGridView1.Columns["XML"].Visible = false;
+
+            dataGridView1.Sort(dataGridView1.Columns["Time"], ListSortDirection.Ascending);
             foreach (DataGridViewRow drow in dataGridView1.Rows)
             {
                 int EvID = Int32.Parse(drow.Cells["EventID"].Value.ToString());
@@ -37,14 +40,24 @@ namespace HacTrac
                         drow.Cells["Threat-Type"].Value = "Payload Drop Detected";
                         break;
 
-                    case 4624:
+                    case 21:
                         drow.DefaultCellStyle.BackColor = Color.Gray;
                         drow.Cells["Threat-Type"].Value = "RDP Login";
                         break;
 
-                    case 4634:
+                    case 23:
                         drow.DefaultCellStyle.BackColor = Color.Gray;
-                        drow.Cells["Threat-Type"].Value = "RDP Logout";
+                        drow.Cells["Threat-Type"].Value = "RDP Logoff";
+                        break;
+
+                    case 24:
+                        drow.DefaultCellStyle.BackColor = Color.Gray;
+                        drow.Cells["Threat-Type"].Value = "RDP Disconnect";
+                        break;
+
+                    case 25:
+                        drow.DefaultCellStyle.BackColor = Color.Gray;
+                        drow.Cells["Threat-Type"].Value = "RDP Session Re-connect";
                         break;
 
                     case 4663:
@@ -73,8 +86,7 @@ namespace HacTrac
 
                 }
             }
-            dataGridView1.Columns["XML"].Visible = false;
-
+            
         }
             
         

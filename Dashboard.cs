@@ -28,7 +28,6 @@ namespace HacTrac
             columns.Add("EventID");
             columns.Add("Level");
             columns.Add("Time");
-
             columns.Add("Task");
             columns.Add("User");
             columns.Add("Operation");
@@ -43,18 +42,19 @@ namespace HacTrac
         {
             log l = new log();
             DataSet ds = new DataSet();
-            if (sender == null && e == null) { ds=l.fullquery(a); }
-            
-            
-            mode m;
-            if (RadioSecurity.Checked) { a.logname = "Security"; m = mode.security; ds = l.QueryRemoteComputer("*[System[(EventID = 4656) or(EventID = 4663) or(EventID = 4690) or (EventID = 4634) or (EventID = 4624)]]", a, m); }
-            else { a.logname = "Microsoft-Windows-Sysmon/Operational"; m = mode.sysmon; ds = l.QueryRemoteComputer("*[System[(EventID=11) or (EventID=1) or (EventID=3)]]", a, m); }
-            
-            
+            if (sender == null && e == null) { ds = l.fullquery(a); }
+
+
+
+            else if (RadioSecurity.Checked) { a.logname = "Security"; ds = l.QueryRemoteComputer("*[System[(EventID = 4663) or (EventID=4690)]]", a); }
+            else if (RadioSysmon.Checked) { a.logname = "Microsoft-Windows-Sysmon/Operational"; ds = l.QueryRemoteComputer("*[System[(EventID=11)]]", a); }
+            else { a.logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational"; ds = l.QueryRemoteComputer("*[System[(EventID=21) or (EventID=24) or (EventID=23) or (EventID=25)]]", a); }
+
             try
             {
                 DataTable dt = ds.Tables["Events"];
                 dataGridView1.DataSource = dt;
+                Alerts.alerts.Clear();
                 l.FilterLog(dataGridView1);
                 dataGridView1.Columns["XML"].Visible = false;
 
@@ -181,60 +181,53 @@ namespace HacTrac
 
                                 break;
 
+                            
+
                             case 1:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=1";
+                                subquery += "EventID=21";
                                 ++countr;
                                 break;
 
                             case 2:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=3";
+                                subquery += "EventID=23";
                                 ++countr;
                                 break;
 
                             case 3:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=";
+                                subquery += "EventID=24";
                                 ++countr;
                                 break;
+
 
                             case 4:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=10";
+                                subquery += "EventID=25";
                                 ++countr;
                                 break;
 
+
                             case 5:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=12";
+                                subquery += "EventID=4656";
                                 ++countr;
                                 break;
 
                             case 6:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=13";
+                                subquery += "EventID=4690";
                                 ++countr;
                                 break;
 
                             case 7:
                                 if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=4624";
+                                subquery += "EventID=4663";
                                 ++countr;
                                 break;
 
-                            case 8:
-                                if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=4634";
-                                ++countr;
-                                break;
-
-                            case 9:
-                                if (countr > 0) { subquery += " or "; --countr; }
-                                subquery += "EventID=4625";
-                                ++countr;
-                                break;
-
+                           
 
 
                             default:
@@ -264,26 +257,35 @@ namespace HacTrac
         {
             CheckFilter();
 
-            if (filter == true) GenerateQuery(); else query = "*";
+            if (filter == true)
 
-            log l = new log();
-            mode m;
-            DataSet ds = new DataSet();
-            if (RadioSysmon.Checked) { a.logname = "Microsoft-Windows-Sysmon/Operational"; m = mode.sysmon; }
-            else { a.logname = "Security"; m = mode.security; }
-            log.viewcount = (int)numericUpDown1.Value;
-            ds = l.QueryRemoteComputer(query, a, m);
-            try
             {
-                
-                dataGridView1.DataSource = ds;
-                dataGridView1.DataMember = "Events";
-                l.FilterLog(dataGridView1);
-                dataGridView1.Columns["XML"].Visible = false;
+                GenerateQuery();
+
+                log l = new log();
+
+                DataSet ds = new DataSet();
+                if (RadioSysmon.Checked) a.logname = "Microsoft-Windows-Sysmon/Operational";
+                else if (RadioSecurity.Checked) a.logname = "Security";
+                else a.logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational";
+
+                ds = l.QueryRemoteComputer(query, a);
+                try
+                {
+
+                    dataGridView1.DataSource = ds;
+                    dataGridView1.DataMember = "Events";
+                    l.FilterLog(dataGridView1);
+                    dataGridView1.Columns["XML"].Visible = false;
+
+
+                }
+                catch (Exception exc)
+                {
+                    MessageBox.Show(exc.Message);
+                }
 
             }
-            catch (Exception exc) { MessageBox.Show(exc.Message); }
-
 
         }
 
@@ -365,7 +367,9 @@ namespace HacTrac
         private void button2_Click(object sender, EventArgs e)
         {
             string logname = "Security";
+            
             if (RadioSysmon.Checked) { logname = "Microsoft-Windows-Sysmon/Operational"; }
+            else if (RDP.Checked) { logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational"; }
 
             log l = new log();
             if (MessageBox.Show("Are you sure you want to clear the " + logname + " log?", "Confirm Log Deletion",
@@ -373,7 +377,7 @@ namespace HacTrac
     MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
             {
                
-                    l.ClearLog(logname, a, false);
+                    l.ClearLog(logname, o: a);
                     MessageBox.Show("Log ClearSuccessful");
                 
             }
@@ -395,6 +399,7 @@ namespace HacTrac
             {
                 DataTable dt = ds.Tables["Events"];
                 dataGridView1.DataSource = dt;
+                Alerts.alerts.Clear();
                 l.FilterLog(dataGridView1);
                 dataGridView1.Columns["XML"].Visible = false;
 
@@ -405,7 +410,26 @@ namespace HacTrac
         private void button5_Click(object sender, EventArgs e)
         {
             MessageBox.Show(dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString());
-            MessageBox.Show("C:\\Users\\akrish\\");
+            
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string[] lognames = new string[] { "Security", "Microsoft-Windows-Sysmon/Operational", "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational" };
+            log l = new log();
+            if (MessageBox.Show("Are you sure you want to clear all logs?", "Confirm Log Deletion",
+    MessageBoxButtons.YesNo, MessageBoxIcon.Question,
+    MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
+            {
+                foreach (string logname in lognames)
+                {
+                    l.ClearLog(logname, o: a);
+                }
+
+            }
+            MessageBox.Show("Logs successfully cleared");
+            dataGridView1.DataSource = new DataTable();
+            dataGridView1.Refresh();
         }
     }
 }

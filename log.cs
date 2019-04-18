@@ -16,12 +16,13 @@ namespace HacTrac
     class log
 
     {
-        public static int viewcount = 50;
+        
 
         DataSet data = new DataSet();
         private void DisplayEventAndLogInformation(EventLogReader logreader)
 
         {
+            int i = 0;
             DataSet ds = new DataSet();
 
 
@@ -39,7 +40,7 @@ namespace HacTrac
                 
 
 
-                int i = 0;
+                
 
             for (EventRecord eventInstance = logreader.ReadEvent();
 
@@ -48,9 +49,9 @@ namespace HacTrac
             {
 
                 ds.Tables["Events"].Rows.Add(eventInstance.Id, eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName, eventInstance.ToXml());
-
                 ++i;
-                if (i > viewcount) break;
+                if (i > 10) break;
+                
             }
 
 
@@ -74,17 +75,17 @@ namespace HacTrac
                 //MessageBox.Show(xmlst);
                 try
                 {
-                    if ((xmlst.Contains("explorer.exe") || xmlst.Contains("VBoxTray.exe")) && xmlst.Contains("<EventID>11</EventID>") && (xmlst.Contains("C:\\Users\\test\\AppData\\Local\\Temp\\1\\VirtualBox Dropped Files") || xmlst.Contains("C:\\Users\\test\\Desktop") || xmlst.Contains("C:\\Users\\Administrator\\Desktop")))
+                    if ((xmlst.Contains("C:\\Windows\\Explorer") || xmlst.Contains("VBoxTray.exe")) && xmlst.Contains("<EventID>11</EventID>") && (xmlst.Contains("VirtualBox Dropped Files") || xmlst.Contains("Desktop")))
                     {
 
                         DataRow drow = ((DataRowView)row.DataBoundItem).Row;
 
 
                         Alerts.alerts.ImportRow(drow);
-                        //Alerts.alerts.Rows[Alerts.alerts.Rows.Count - 1].DefaultCellStyle.BackColor = Color.OrangeRed;
+                       
                     }
 
-                    else if (xmlst.Contains("<Data Name='LogonType'>3</Data>"))
+                    else if (xmlst.Contains("<EventID>21</EventID>") || xmlst.Contains("<EventID>23</EventID>") || xmlst.Contains("<EventID>24</EventID>") || xmlst.Contains("<EventID>25</EventID>"))
                     {
                         DataRow drow = ((DataRowView)row.DataBoundItem).Row;
 
@@ -129,7 +130,7 @@ namespace HacTrac
         }
 
 
-        public void ClearLog(string logname, Queryobj o, bool backup,string fname="")
+        public void ClearLog(string logname, Queryobj o,string fname="")
         {
             EventLogSession session = new EventLogSession(
                o.IP,                               
@@ -137,14 +138,10 @@ namespace HacTrac
                o.username,                                
                o.password,
                SessionAuthentication.Default);
-            if(backup==true)
-            {
-                
-                session.ExportLog(logname, PathType.LogName, "*",fname);
-                
-            }
+           
 
             session.ClearLog(logname);
+            Alerts.alerts.Clear();
             
 
 
@@ -155,18 +152,27 @@ namespace HacTrac
         {
             DataSet ds1 = new DataSet();
             DataSet ds2 = new DataSet();
+            DataSet ds3 = new DataSet();
+            
             log l = new log();
-            o.logname = "Microsoft-Windows-Sysmon/Operational";
-            ds1 = l.QueryRemoteComputer("*[System[(EventID=11) or (EventID=1) or (EventID=3)]]", o,mode.sysmon);
-            o.logname = "Security";
-            ds2 = l.QueryRemoteComputer("*[System[(EventID=4656) or (EventID=4663) or (EventID=4690) or (EventID=4634) or (EventID=4624)]]", o,mode.security);
-            ds1.Merge(ds2);
+             o.logname = "Microsoft-Windows-Sysmon/Operational";
+             ds1 = l.QueryRemoteComputer("*[System[(EventID=11)]]", o);
+             o.logname = "Security";
+             ds2 = l.QueryRemoteComputer("*[System[(EventID=4663) or (EventID=4690)]]", o);
+             ds1.Merge(ds2);
+             o.logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational";
+             ds3 = l.QueryRemoteComputer("*[System[(EventID=21) or (EventID=24) or (EventID=23) or (EventID=25)]]", o);
+             ds1.Merge(ds3);
+
+
+
             return ds1;
 
         }
 
-        internal DataSet QueryRemoteComputer(string querystring, Queryobj o, mode a)
+        public DataSet QueryRemoteComputer(string querystring, Queryobj o)
         {
+            
 
             string queryString = querystring; // XPATH Query
             
