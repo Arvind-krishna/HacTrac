@@ -13,17 +13,22 @@ namespace HacTrac
     public partial class Alerts : Form
     {
         public static DataTable alerts = new DataTable();
+        
+       
         public Alerts()
         { 
             InitializeComponent();
-    
-            
+
 
 
         }
 
         private void Alerts_Load(object sender, EventArgs e)
         {
+           
+
+            DataView view = new DataView(alerts);
+            alerts = view.ToTable(true);
             alerts = alerts.DefaultView.ToTable(true);
             dataGridView1.DataSource = alerts;
             dataGridView1.Columns["XML"].Visible = false;
@@ -66,10 +71,15 @@ namespace HacTrac
                         {
                             if (drow.Cells["XML"].Value.ToString().Contains("0x6</Data>")) drow.Cells["Threat-Type"].Value = "Deception Document Modified";
                             else drow.Cells["Threat-Type"].Value = "Deception Document Opened"; }
-                        else if (drow.Cells["XML"].Value.ToString().Contains("<Data Name='AccessMask'>0x10000</Data>"))
-                        { drow.Cells["Threat-Type"].Value = "Deception Document Deleted"; }
+                        
                         else drow.Cells["Threat-Type"].Value = "Deception Document Accessed";
                         break;
+
+                    case 4660:
+                        drow.DefaultCellStyle.BackColor = Color.Red;
+                        drow.Cells["Threat-Type"].Value = "Deception Document Deleted";
+                        break;
+
 
                     case 4656:
                         drow.DefaultCellStyle.BackColor = Color.Orange;
@@ -119,6 +129,11 @@ namespace HacTrac
         {
             alerts.Clear();
             dataGridView1.Refresh();
+        }
+
+        private void Alerts_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

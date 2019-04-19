@@ -13,7 +13,7 @@ namespace HacTrac
 {
     enum mode { security, sysmon };
     
-    class log
+    class Log
 
     {
         
@@ -22,7 +22,7 @@ namespace HacTrac
         private void DisplayEventAndLogInformation(EventLogReader logreader)
 
         {
-            int i = 0;
+            
             DataSet ds = new DataSet();
 
 
@@ -49,8 +49,7 @@ namespace HacTrac
             {
 
                 ds.Tables["Events"].Rows.Add(eventInstance.Id, eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName, eventInstance.ToXml());
-                ++i;
-                if (i > 10) break;
+               
                 
             }
 
@@ -78,53 +77,53 @@ namespace HacTrac
                     if ((xmlst.Contains("C:\\Windows\\Explorer") || xmlst.Contains("VBoxTray.exe")) && xmlst.Contains("<EventID>11</EventID>") && (xmlst.Contains("VirtualBox Dropped Files") || xmlst.Contains("Desktop")))
                     {
 
-                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
+                        DataRow roe = ((DataRowView)row.DataBoundItem).Row;
 
 
-                        Alerts.alerts.ImportRow(drow);
+                        Alerts.alerts.Rows.Add(roe.ItemArray);
                        
                     }
 
                     else if (xmlst.Contains("<EventID>21</EventID>") || xmlst.Contains("<EventID>23</EventID>") || xmlst.Contains("<EventID>24</EventID>") || xmlst.Contains("<EventID>25</EventID>"))
                     {
-                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
+                        DataRow roe = ((DataRowView)row.DataBoundItem).Row;
 
 
-                        Alerts.alerts.ImportRow(drow);
+                        Alerts.alerts.Rows.Add(roe.ItemArray);
                     }
 
-                    else if (xmlst.Contains("<EventID>4656</EventID>") && xmlst.Contains("C:\\Confidential\\"))
+                    /*  else if (xmlst.Contains("<EventID>4656</EventID>") && xmlst.Contains("C:\\Confidential\\"))
+                          {
+
+                          DataRow roe = ((DataRowView)row.DataBoundItem).Row;
+
+
+                          Alerts.alerts.Rows.Add(roe.ItemArray);}*/
+
+
+                    else if ((xmlst.Contains("<EventID>4663</EventID>") && xmlst.Contains("C:\\Confidential\\") && xmlst.Contains("notepad")))
                         {
 
-                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
+                        DataRow roe = ((DataRowView)row.DataBoundItem).Row;
 
 
-                        Alerts.alerts.ImportRow(drow);
+                        Alerts.alerts.Rows.Add(roe.ItemArray);
                     }
 
-                    else if (xmlst.Contains("<EventID>4663</EventID>") && xmlst.Contains("C:\\Confidential\\"))
-                        {
-
-                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
-
-
-                        Alerts.alerts.ImportRow(drow);
-                       }
-
-                    else if (xmlst.Contains("<EventID>4690</EventID>"))
+                    else if (xmlst.Contains("<EventID>4690</EventID>")|| xmlst.Contains("<EventID>4660</EventID>"))
                     {
 
-                        DataRow drow = ((DataRowView)row.DataBoundItem).Row;
+                        DataRow roe = ((DataRowView)row.DataBoundItem).Row;
 
 
-                        Alerts.alerts.ImportRow(drow);
+                        Alerts.alerts.Rows.Add(roe.ItemArray);
                     }
 
 
 
 
                 }
-                catch (Exception bee) { MessageBox.Show(bee.Message); }
+                catch (Exception bee) {  }
             }
                 
         }
@@ -154,11 +153,11 @@ namespace HacTrac
             DataSet ds2 = new DataSet();
             DataSet ds3 = new DataSet();
             
-            log l = new log();
+            Log l = new Log();
              o.logname = "Microsoft-Windows-Sysmon/Operational";
              ds1 = l.QueryRemoteComputer("*[System[(EventID=11)]]", o);
              o.logname = "Security";
-             ds2 = l.QueryRemoteComputer("*[System[(EventID=4663) or (EventID=4690)]]", o);
+             ds2 = l.QueryRemoteComputer("*[System[(EventID=4663) or (EventID=4660) or (EventID=4656) or (EventID=4690)]]", o);
              ds1.Merge(ds2);
              o.logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational";
              ds3 = l.QueryRemoteComputer("*[System[(EventID=21) or (EventID=24) or (EventID=23) or (EventID=25)]]", o);

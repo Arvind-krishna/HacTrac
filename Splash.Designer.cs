@@ -1,6 +1,6 @@
 ﻿namespace HacTrac
 {
-    partial class HacTrac
+    partial class Splash
     {
         /// <summary>
         /// Required designer variable.
@@ -71,11 +71,11 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 120);
+            this.label1.Location = new System.Drawing.Point(68, 120);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(135, 13);
+            this.label1.Size = new System.Drawing.Size(97, 13);
             this.label1.TabIndex = 3;
-            this.label1.Text = "Remote IP/ComputerName";
+            this.label1.Text = "Remote IP address";
             // 
             // label2
             // 
@@ -175,7 +175,7 @@
             this.label5.TabIndex = 13;
             this.label5.Text = "HacTrac : Remote Log Tool";
             // 
-            // HacTrac
+            // Splash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -191,7 +191,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.DomBox);
             this.Controls.Add(this.IPbox);
-            this.Name = "HacTrac";
+            this.Name = "Splash";
             this.Text = "HacTrac";
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

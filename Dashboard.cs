@@ -27,7 +27,7 @@ namespace HacTrac
             DataColumnCollection columns = Alerts.alerts.Columns;
             columns.Add("EventID");
             columns.Add("Level");
-            columns.Add("Time");
+            columns.Add("Time").Unique=true;
             columns.Add("Task");
             columns.Add("User");
             columns.Add("Operation");
@@ -40,13 +40,13 @@ namespace HacTrac
 
         private void button1_Click(object sender, EventArgs e)
         {
-            log l = new log();
+            Log l = new Log();
             DataSet ds = new DataSet();
             if (sender == null && e == null) { ds = l.fullquery(a); }
 
 
 
-            else if (RadioSecurity.Checked) { a.logname = "Security"; ds = l.QueryRemoteComputer("*[System[(EventID = 4663) or (EventID=4690)]]", a); }
+            else if (RadioSecurity.Checked) { a.logname = "Security"; ds = l.QueryRemoteComputer("*[System[(EventID = 4663) or (EventID = 4660) or (EventID=4690)]]", a); }
             else if (RadioSysmon.Checked) { a.logname = "Microsoft-Windows-Sysmon/Operational"; ds = l.QueryRemoteComputer("*[System[(EventID=11)]]", a); }
             else { a.logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational"; ds = l.QueryRemoteComputer("*[System[(EventID=21) or (EventID=24) or (EventID=23) or (EventID=25)]]", a); }
 
@@ -262,7 +262,7 @@ namespace HacTrac
             {
                 GenerateQuery();
 
-                log l = new log();
+                Log l = new Log();
 
                 DataSet ds = new DataSet();
                 if (RadioSysmon.Checked) a.logname = "Microsoft-Windows-Sysmon/Operational";
@@ -371,7 +371,7 @@ namespace HacTrac
             if (RadioSysmon.Checked) { logname = "Microsoft-Windows-Sysmon/Operational"; }
             else if (RDP.Checked) { logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational"; }
 
-            log l = new log();
+            Log l = new Log();
             if (MessageBox.Show("Are you sure you want to clear the " + logname + " log?", "Confirm Log Deletion",
     MessageBoxButtons.YesNo, MessageBoxIcon.Question,
     MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
@@ -390,7 +390,7 @@ namespace HacTrac
 
         private void button4_Click(object sender, EventArgs e)
         {
-            log l = new log();
+            Log l = new Log();
             DataSet ds = new DataSet();
             ds = l.fullquery(a); 
 
@@ -416,7 +416,7 @@ namespace HacTrac
         private void button6_Click(object sender, EventArgs e)
         {
             string[] lognames = new string[] { "Security", "Microsoft-Windows-Sysmon/Operational", "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational" };
-            log l = new log();
+            Log l = new Log();
             if (MessageBox.Show("Are you sure you want to clear all logs?", "Confirm Log Deletion",
     MessageBoxButtons.YesNo, MessageBoxIcon.Question,
     MessageBoxDefaultButton.Button1) == System.Windows.Forms.DialogResult.Yes)
@@ -425,11 +425,16 @@ namespace HacTrac
                 {
                     l.ClearLog(logname, o: a);
                 }
-
+                MessageBox.Show("Logs successfully cleared");
+                dataGridView1.DataSource = new DataTable();
+                dataGridView1.Refresh();
             }
-            MessageBox.Show("Logs successfully cleared");
-            dataGridView1.DataSource = new DataTable();
-            dataGridView1.Refresh();
+           
+        }
+
+        private void Dash_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 }

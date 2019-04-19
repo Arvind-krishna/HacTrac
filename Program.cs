@@ -16,7 +16,7 @@ namespace HacTrac
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HacTrac());
+            Application.Run(new Splash());
             
         }
     }

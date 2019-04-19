@@ -88,6 +88,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "Alerts";
             this.Text = "Alerts";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Alerts_FormClosed);
             this.Load += new System.EventHandler(this.Alerts_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
