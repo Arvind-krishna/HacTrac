@@ -18,6 +18,8 @@ namespace HacTrac
         Queryobj a = new Queryobj();
         String query;
         Boolean filter;
+        public static bool fullquery;
+        public static DataTable dt;
 
 
         public Dash(Queryobj o)
@@ -29,37 +31,23 @@ namespace HacTrac
             columns.Add("Level");
             columns.Add("Time").Unique=true;
             columns.Add("Task");
-            columns.Add("User");
+            
             columns.Add("Operation");
             columns.Add("XML");
             columns.Add("Threat-Type");
 
+            
 
-            button1_Click(null, null);
+
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Log l = new Log();
-            DataSet ds = new DataSet();
-            if (sender == null && e == null) { ds = l.fullquery(a); }
 
-
-
-            else if (RadioSecurity.Checked) { a.logname = "Security"; ds = l.QueryRemoteComputer("*[System[(EventID = 4663) or (EventID = 4660) or (EventID=4690)]]", a); }
-            else if (RadioSysmon.Checked) { a.logname = "Microsoft-Windows-Sysmon/Operational"; ds = l.QueryRemoteComputer("*[System[(EventID=11)]]", a); }
-            else { a.logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational"; ds = l.QueryRemoteComputer("*[System[(EventID=21) or (EventID=24) or (EventID=23) or (EventID=25)]]", a); }
-
-            try
-            {
-                DataTable dt = ds.Tables["Events"];
-                dataGridView1.DataSource = dt;
-                Alerts.alerts.Clear();
-                l.FilterLog(dataGridView1);
-                dataGridView1.Columns["XML"].Visible = false;
-
-            }
-            catch (Exception exx) { MessageBox.Show(exx.Message); }
+            fullquery = false;
+            progressBar1.Visible = true;
+            backgroundWorker1.RunWorkerAsync();
 
         }
 
@@ -275,7 +263,7 @@ namespace HacTrac
 
                     dataGridView1.DataSource = ds;
                     dataGridView1.DataMember = "Events";
-                    l.FilterLog(dataGridView1);
+                    
                     dataGridView1.Columns["XML"].Visible = false;
 
 
@@ -330,38 +318,29 @@ namespace HacTrac
         private void button1_Click_1(object sender, EventArgs e)
         {
 
-            string csv = string.Empty;
+            
+            var sb = new StringBuilder();
 
-            //Add the Header row for CSV file.
+          
             try
             {
-                foreach (DataGridViewColumn column in dataGridView1.Columns)
-                {
-                    csv += column.HeaderText + ',';
-                }
+                
+                var headers = dataGridView1.Columns.Cast<DataGridViewColumn>();
+                sb.AppendLine(string.Join(",", headers.Select(column => "\"" + column.HeaderText + "\"").ToArray()));
 
-                //Add new line.
-                csv += "\r\n";
-
-                //Adding the Rows
                 foreach (DataGridViewRow row in dataGridView1.Rows)
                 {
-                    foreach (DataGridViewCell cell in row.Cells)
-                    {
-                        //Add the Data rows.
-                        csv += cell.Value.ToString().Replace(",", ";") + ',';
-                    }
-
-                    //Add new line.
-                    csv += "\r\n";
+                    var cells = row.Cells.Cast<DataGridViewCell>();
+                    sb.AppendLine(string.Join(",", cells.Select(cell => "\"" + cell.Value + "\"").ToArray()));
                 }
+
             }
             catch (Exception) { MessageBox.Show("Nothing to export"); }
             //Exporting to CSV.
             saveFileDialog2.DefaultExt = "csv";
             saveFileDialog2.Filter = "CSV files (*.csv)|*.csv";
             if (saveFileDialog2.ShowDialog() == DialogResult.OK)
-            { File.WriteAllText(saveFileDialog2.FileName, csv); }
+            { File.WriteAllText(saveFileDialog2.FileName, sb.ToString()); }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -390,26 +369,19 @@ namespace HacTrac
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Log l = new Log();
-            DataSet ds = new DataSet();
-            ds = l.fullquery(a); 
+            progressBar1.Visible = true;
+            fullquery = true;
+            backgroundWorker1.RunWorkerAsync();
+            
 
 
-            try
-            {
-                DataTable dt = ds.Tables["Events"];
-                dataGridView1.DataSource = dt;
-                Alerts.alerts.Clear();
-                l.FilterLog(dataGridView1);
-                dataGridView1.Columns["XML"].Visible = false;
 
-            }
-            catch (Exception exx) { MessageBox.Show(exx.Message); }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString());
+            try { MessageBox.Show(dataGridView1.SelectedRows[0].Cells["XML"].Value.ToString()); }
+            catch (Exception) { }
             
         }
 
@@ -435,6 +407,38 @@ namespace HacTrac
         private void Dash_FormClosed(object sender, FormClosedEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Log l = new Log();
+            DataSet ds = new DataSet();
+            if (fullquery==true) { ds = l.fullquery(a); }
+
+
+
+            else if (RadioSecurity.Checked) { a.logname = "Security"; ds = l.QueryRemoteComputer("*[System[(EventID = 4663) or (EventID = 4660) or (EventID=4690)]]", a); }
+            else if (RadioSysmon.Checked) { a.logname = "Microsoft-Windows-Sysmon/Operational"; ds = l.QueryRemoteComputer("*[System[(EventID=11)]]", a); }
+            else { a.logname = "Microsoft-Windows-TerminalServices-LocalSessionManager/Operational"; ds = l.QueryRemoteComputer("*[System[(EventID=21) or (EventID=24) or (EventID=23) or (EventID=25)]]", a); }
+
+            try
+            {
+                dt = ds.Tables["Events"];
+                
+                Alerts.alerts.Clear();
+                l.FilterLog(dt);
+
+                
+
+            }
+            catch (Exception exx) { MessageBox.Show(exx.Message); }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            progressBar1.Visible = false;
+            dataGridView1.DataSource = dt;
+            dataGridView1.Columns["XML"].Visible = false;
         }
     }
 }

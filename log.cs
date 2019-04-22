@@ -34,13 +34,14 @@ namespace HacTrac
                 ds.Tables["Events"].Columns.Add("Time");
                 
                 ds.Tables["Events"].Columns.Add("Task");
-                ds.Tables["Events"].Columns.Add("User");
+                
                 ds.Tables["Events"].Columns.Add("Operation");
                 ds.Tables["Events"].Columns.Add("XML");
-                
+            
 
 
-                
+
+
 
             for (EventRecord eventInstance = logreader.ReadEvent();
 
@@ -48,7 +49,7 @@ namespace HacTrac
 
             {
 
-                ds.Tables["Events"].Rows.Add(eventInstance.Id, eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.TaskDisplayName, eventInstance.UserId, eventInstance.OpcodeDisplayName, eventInstance.ToXml());
+                ds.Tables["Events"].Rows.Add(eventInstance.Id, eventInstance.LevelDisplayName, eventInstance.TimeCreated, eventInstance.TaskDisplayName, eventInstance.OpcodeDisplayName, eventInstance.ToXml());
                
                 
             }
@@ -65,31 +66,33 @@ namespace HacTrac
 
       
 
-        public void FilterLog(DataGridView ds)
+        public void FilterLog(DataTable dt)
         {
 
-            foreach (DataGridViewRow row in ds.Rows)
+            foreach (DataRow row in dt.Rows)
             {
-                string xmlst = row.Cells["XML"].Value.ToString(); ;
+                string xmlst = row["XML"].ToString();
+                MessageBox.Show(xmlst);
+                  
                 //MessageBox.Show(xmlst);
                 try
                 {
                     if ((xmlst.Contains("C:\\Windows\\Explorer") || xmlst.Contains("VBoxTray.exe")) && xmlst.Contains("<EventID>11</EventID>") && (xmlst.Contains("VirtualBox Dropped Files") || xmlst.Contains("Desktop")))
                     {
 
-                        DataRow roe = ((DataRowView)row.DataBoundItem).Row;
+                        
 
 
-                        Alerts.alerts.Rows.Add(roe.ItemArray);
+                        Alerts.alerts.Rows.Add(row.ItemArray);
                        
                     }
 
                     else if (xmlst.Contains("<EventID>21</EventID>") || xmlst.Contains("<EventID>23</EventID>") || xmlst.Contains("<EventID>24</EventID>") || xmlst.Contains("<EventID>25</EventID>"))
                     {
-                        DataRow roe = ((DataRowView)row.DataBoundItem).Row;
+                       
 
 
-                        Alerts.alerts.Rows.Add(roe.ItemArray);
+                        Alerts.alerts.Rows.Add(row.ItemArray);
                     }
 
                     /*  else if (xmlst.Contains("<EventID>4656</EventID>") && xmlst.Contains("C:\\Confidential\\"))
@@ -104,19 +107,19 @@ namespace HacTrac
                     else if ((xmlst.Contains("<EventID>4663</EventID>") && xmlst.Contains("C:\\Confidential\\") && xmlst.Contains("notepad")))
                         {
 
-                        DataRow roe = ((DataRowView)row.DataBoundItem).Row;
+                        
 
 
-                        Alerts.alerts.Rows.Add(roe.ItemArray);
+                        Alerts.alerts.Rows.Add(row.ItemArray);
                     }
 
                     else if (xmlst.Contains("<EventID>4690</EventID>")|| xmlst.Contains("<EventID>4660</EventID>"))
                     {
 
-                        DataRow roe = ((DataRowView)row.DataBoundItem).Row;
+                        
 
 
-                        Alerts.alerts.Rows.Add(roe.ItemArray);
+                        Alerts.alerts.Rows.Add(row.ItemArray);
                     }
 
 
